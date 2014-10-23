@@ -9,10 +9,40 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Test Sudoku Solver.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>TestSudokuSolver.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Tt.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7336A71519F913D600F2F2AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7336A72519F916A700F2F2AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7336A73519F9266900F2F2AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7336A74219F9268F00F2F2AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

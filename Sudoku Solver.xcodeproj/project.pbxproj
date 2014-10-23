@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7336A71A19F913D600F2F2AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A71919F913D600F2F2AB /* main.swift */; };
+		7336A72119F913F800F2F2AB /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A72019F913F800F2F2AB /* Square.swift */; };
+		7336A74819F9268F00F2F2AB /* TestSudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A74719F9268F00F2F2AB /* TestSudokuSolver.swift */; };
+		7336A74C19F9273900F2F2AB /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A72019F913F800F2F2AB /* Square.swift */; };
+		7336A75019F9297800F2F2AB /* easy50.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74D19F9297800F2F2AB /* easy50.txt */; };
+		7336A75119F9297800F2F2AB /* hardest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74E19F9297800F2F2AB /* hardest.txt */; };
+		7336A75219F9297800F2F2AB /* top95.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74F19F9297800F2F2AB /* top95.txt */; };
+		7336A75419F93BEC00F2F2AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A71919F913D600F2F2AB /* main.swift */; };
+		7336A75619F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
+		7336A75719F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +34,25 @@
 /* Begin PBXFileReference section */
 		7336A71619F913D600F2F2AB /* Sudoku Solver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Sudoku Solver"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7336A71919F913D600F2F2AB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		7336A72019F913F800F2F2AB /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		7336A74319F9268F00F2F2AB /* TestSudokuSolver.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestSudokuSolver.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7336A74619F9268F00F2F2AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7336A74719F9268F00F2F2AB /* TestSudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSudokuSolver.swift; sourceTree = "<group>"; };
+		7336A74D19F9297800F2F2AB /* easy50.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = easy50.txt; sourceTree = "<group>"; };
+		7336A74E19F9297800F2F2AB /* hardest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hardest.txt; sourceTree = "<group>"; };
+		7336A74F19F9297800F2F2AB /* top95.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = top95.txt; sourceTree = "<group>"; };
+		7336A75519F942B700F2F2AB /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7336A71319F913D600F2F2AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7336A74019F9268F00F2F2AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				7336A71819F913D600F2F2AB /* Sudoku Solver */,
+				7336A74419F9268F00F2F2AB /* TestSudokuSolver */,
 				7336A71719F913D600F2F2AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				7336A71619F913D600F2F2AB /* Sudoku Solver */,
+				7336A74319F9268F00F2F2AB /* TestSudokuSolver.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +83,39 @@
 		7336A71819F913D600F2F2AB /* Sudoku Solver */ = {
 			isa = PBXGroup;
 			children = (
+				7336A75519F942B700F2F2AB /* Grid.swift */,
+				7336A72019F913F800F2F2AB /* Square.swift */,
 				7336A71919F913D600F2F2AB /* main.swift */,
+				7336A75319F929A000F2F2AB /* Puzzles */,
 			);
 			path = "Sudoku Solver";
+			sourceTree = "<group>";
+		};
+		7336A74419F9268F00F2F2AB /* TestSudokuSolver */ = {
+			isa = PBXGroup;
+			children = (
+				7336A74719F9268F00F2F2AB /* TestSudokuSolver.swift */,
+				7336A74519F9268F00F2F2AB /* Supporting Files */,
+			);
+			path = TestSudokuSolver;
+			sourceTree = "<group>";
+		};
+		7336A74519F9268F00F2F2AB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7336A74619F9268F00F2F2AB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7336A75319F929A000F2F2AB /* Puzzles */ = {
+			isa = PBXGroup;
+			children = (
+				7336A74D19F9297800F2F2AB /* easy50.txt */,
+				7336A74E19F9297800F2F2AB /* hardest.txt */,
+				7336A74F19F9297800F2F2AB /* top95.txt */,
+			);
+			name = Puzzles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +138,23 @@
 			productReference = 7336A71619F913D600F2F2AB /* Sudoku Solver */;
 			productType = "com.apple.product-type.tool";
 		};
+		7336A74219F9268F00F2F2AB /* TestSudokuSolver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7336A74919F9268F00F2F2AB /* Build configuration list for PBXNativeTarget "TestSudokuSolver" */;
+			buildPhases = (
+				7336A73F19F9268F00F2F2AB /* Sources */,
+				7336A74019F9268F00F2F2AB /* Frameworks */,
+				7336A74119F9268F00F2F2AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestSudokuSolver;
+			productName = TestSudokuSolver;
+			productReference = 7336A74319F9268F00F2F2AB /* TestSudokuSolver.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -92,6 +165,9 @@
 				ORGANIZATIONNAME = "Bernd Beuster";
 				TargetAttributes = {
 					7336A71519F913D600F2F2AB = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					7336A74219F9268F00F2F2AB = {
 						CreatedOnToolsVersion = 6.1;
 					};
 				};
@@ -109,16 +185,43 @@
 			projectRoot = "";
 			targets = (
 				7336A71519F913D600F2F2AB /* Sudoku Solver */,
+				7336A74219F9268F00F2F2AB /* TestSudokuSolver */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7336A74119F9268F00F2F2AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7336A75119F9297800F2F2AB /* hardest.txt in Resources */,
+				7336A75019F9297800F2F2AB /* easy50.txt in Resources */,
+				7336A75219F9297800F2F2AB /* top95.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7336A71219F913D600F2F2AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7336A72119F913F800F2F2AB /* Square.swift in Sources */,
 				7336A71A19F913D600F2F2AB /* main.swift in Sources */,
+				7336A75619F942B700F2F2AB /* Grid.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7336A73F19F9268F00F2F2AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7336A74C19F9273900F2F2AB /* Square.swift in Sources */,
+				7336A74819F9268F00F2F2AB /* TestSudokuSolver.swift in Sources */,
+				7336A75419F93BEC00F2F2AB /* main.swift in Sources */,
+				7336A75719F942B700F2F2AB /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +317,38 @@
 			};
 			name = Release;
 		};
+		7336A74A19F9268F00F2F2AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TestSudokuSolver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7336A74B19F9268F00F2F2AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TestSudokuSolver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -231,6 +366,14 @@
 			buildConfigurations = (
 				7336A71E19F913D600F2F2AB /* Debug */,
 				7336A71F19F913D600F2F2AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7336A74919F9268F00F2F2AB /* Build configuration list for PBXNativeTarget "TestSudokuSolver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7336A74A19F9268F00F2F2AB /* Debug */,
+				7336A74B19F9268F00F2F2AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
