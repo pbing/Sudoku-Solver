@@ -21,9 +21,5 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
     return res
 }
 
-//println(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/easy50.txt",separator:"========"))
-//println(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/hardest.txt"))
-//println(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/top95.txt"))
-
 let grid = Grid()
 println(grid)

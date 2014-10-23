@@ -53,8 +53,11 @@ class TestSudokuSolver: XCTestCase {
     }
     
     func testFromFile() {
-        XCTAssertEqual(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/easy50.txt", separator: "========").count,50)
-        XCTAssertEqual(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/hardest.txt").count,11)
-        XCTAssertEqual(fromFile("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver/top95.txt").count,95)
+        let fileManager = NSFileManager()
+        fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
+
+        XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
+        XCTAssertEqual(fromFile("hardest.txt").count,11)
+        XCTAssertEqual(fromFile("top95.txt").count,95)
     }
 }
