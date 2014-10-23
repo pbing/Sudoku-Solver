@@ -24,5 +24,8 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
 }
 
 let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
+let grid2 = fromFile("easy50.txt", separator: "========")[1]
+let grid3 = fromFile("top95.txt")[94]
+
 let grid = Grid(grid: grid1)
 println(grid)

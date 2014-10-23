@@ -55,11 +55,12 @@ class Grid: Printable {
         var res: [Square] = []
         
         for c in grid {
-            if let d = String(c).toInt() {
-                switch c {
-                case "0",".":
-                    res.append(Square(0))
-                default:
+            switch c {
+            case "0",".":
+                res.append(Square(0))
+                
+            default:
+                if let d = String(c).toInt() {
                     res.append(Square(1 << (d - 1)))
                 }
             }
