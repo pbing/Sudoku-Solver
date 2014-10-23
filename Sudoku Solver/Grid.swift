@@ -31,7 +31,7 @@ class Grid: Printable {
         
         /* Build table grid */
         var row: [String] = []
-        for r in 0..<3 {
+        for r in 0..<9 {
             var col: [String] = []
             
             for i in 0..<9 {
@@ -44,12 +44,31 @@ class Grid: Printable {
             row.append("|".join([c0,c1,c2]))
         }
         
-        return "\n\(line)\n".join(row)
+        let r0 = "\n".join(row[0...2])
+        let r1 = "\n".join(row[3...5])
+        let r2 = "\n".join(row[6...8])
+        return "\n\(line)\n".join([r0,r1,r2])
     }
     
-    init() {
-        for i in 0..<9*9 {
-            grid.append(Square(0))
+    /* Convert grid into an array of Squares with '0' or '.' for empties. */
+    func gridValue(grid: String) -> [Square] {
+        var res: [Square] = []
+        
+        for c in grid {
+            if let d = String(c).toInt() {
+                switch c {
+                case "0",".":
+                    res.append(Square(0))
+                default:
+                    res.append(Square(1 << (d - 1)))
+                }
+            }
         }
+        
+        return res
+    }
+    
+    init(grid: String) {
+        self.grid = gridValue(grid)
     }
 }

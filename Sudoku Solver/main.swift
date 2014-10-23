@@ -2,6 +2,8 @@
 //  main.swift
 //  Sudoku Solver
 //
+//  Constraint based solver by Peter Norvig (see http://norvig.com/sudoku.html )
+//
 //  Created by Bernd Beuster on 23.10.14.
 //  Copyright (c) 2014 Bernd Beuster. All rights reserved.
 //
@@ -21,5 +23,6 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
     return res
 }
 
-let grid = Grid()
+let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
+let grid = Grid(grid: grid1)
 println(grid)
