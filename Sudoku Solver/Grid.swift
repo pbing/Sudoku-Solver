@@ -112,7 +112,7 @@ struct Grid: Printable {
         
         /* 3x3 square */
         row = 3 * (index / (3 * columns))
-        column = 3 * ((index % 9) / 3)
+        column = 3 * ((index % rows) / 3)
         for r in 0..<3 {
             for c in 0..<3 {
                 let i = (row + r) * columns + (column + c)
