@@ -8,9 +8,27 @@
 
 import Foundation
 
-class Grid: Printable {
+struct Grid: Printable {
+    let rows = 9, columns = 9
     var grid: [Square] = []
-    var str = "Not initialized."
+    
+    func indexIsValid(row: Int, column: Int) -> Bool {
+        return row >= 0 && row < rows && column >= 0 && column < columns
+    }
+    
+    subscript(row: Int, column: Int) -> Square {
+        get {
+            assert(indexIsValid(row, column: column), "Index out of range.")
+            return grid[(row * columns + column)]
+            
+        }
+        
+        set {
+            assert(indexIsValid(row, column: column), "Index out of range.")
+            grid[(row * columns + column)] = newValue
+            
+        }
+    }
     
     var description: String {
         /* Convert to NSString in order to determine the string length. */
@@ -31,11 +49,11 @@ class Grid: Printable {
         
         /* Build table grid */
         var row: [String] = []
-        for r in 0..<9 {
+        for r in 0..<rows {
             var col: [String] = []
             
-            for i in 0..<9 {
-                col.append(values[9*r + i].stringByPaddingToLength(maxLen, withString: " ", startingAtIndex: 0))
+            for i in 0..<columns {
+                col.append(values[r * columns + i].stringByPaddingToLength(maxLen, withString: " ", startingAtIndex: 0))
             }
             
             let c0 = " ".join(col[0...2])
@@ -71,5 +89,42 @@ class Grid: Printable {
     
     init(grid: String) {
         self.grid = gridValue(grid)
+    }
+    
+    /* A unit are the columns 1-9, the rows A-I and
+    a collection of nine squares. */
+    func units(index: Int) -> [Int] {
+        var units: [Int] = [index]
+        
+        /* same row */
+        var row = index / columns
+        for column in 0..<columns {
+            let i = row * columns + column
+            if i != index { units.append(i) }
+        }
+        
+        /* same column */
+        var column = index % rows
+        for row in 0..<columns {
+            let i = row * columns + column
+            if i != index { units.append(i) }
+        }
+        
+        /* 3x3 square */
+        row = 3 * (index / (3 * columns))
+        column = 3 * ((index % 9) / 3)
+        for r in 0..<3 {
+            for c in 0..<3 {
+                let i = (row + r) * columns + (column + c)
+                if i != index { units.append(i) }
+            }
+        }
+        
+        return units
+    }
+    
+    func peers(index: Int) -> [Int] {
+        var peers: [Int] = []
+        return peers
     }
 }

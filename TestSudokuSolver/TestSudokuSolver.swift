@@ -55,9 +55,27 @@ class TestSudokuSolver: XCTestCase {
     func testFromFile() {
         let fileManager = NSFileManager()
         fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
-
+        
         XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
         XCTAssertEqual(fromFile("hardest.txt").count,11)
         XCTAssertEqual(fromFile("top95.txt").count,95)
+    }
+    
+    func testUnits() {
+        let grid = Grid(grid: "")
+        
+        /* Square 'C2' */
+        XCTAssertEqual(grid.units(2*9 + 1).count, 3*9 - 2)
+        XCTAssertEqual(grid.units(2*9 + 1), [19,
+            18, 20, 21, 22, 23, 24, 25, 26,
+            1, 10, 28, 37, 46, 55, 64, 73,
+            0, 1, 2, 9, 10, 11, 18, 20])
+        
+        /* Square 'E5' */
+        XCTAssertEqual(grid.units(4*9 + 4).count, 3*9 - 2)
+        XCTAssertEqual(grid.units(4*9 + 4), [40,
+            36, 37, 38, 39, 41, 42, 43, 44,
+            4, 13, 22, 31, 49, 58, 67, 76,
+            30,31,32,39,41,48,49,50])
     }
 }

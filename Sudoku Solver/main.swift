@@ -29,3 +29,11 @@ let grid3 = fromFile("top95.txt")[94]
 
 let grid = Grid(grid: grid1)
 println(grid)
+
+/* C2 */
+/*println(grid.units(2*9 + 1))
+println(grid.units(4*9 + 1).count)*/
+
+ /* E5 */
+println(grid.units(4*9 + 4))
+println(grid.units(4*9 + 4).count)
