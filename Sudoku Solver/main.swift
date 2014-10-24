@@ -10,34 +10,12 @@
 
 import Foundation
 
-/* Parse a file into a list of strings, separated by separator. */
-func fromFile(fileName: String, separator: String = "\n") -> [String] {
-    var res = [String]()
-    
-    if let data = NSData(contentsOfFile: fileName) {
-        if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
-            let res = str.componentsSeparatedByString(separator) as [String]
-            return res.filter { !$0.isEmpty }
-        }
-    }
-    return res
-}
 
 let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
 let grid2 = fromFile("easy50.txt", separator: "========")[1]
 let grid3 = fromFile("top95.txt")[94]
 
 let grid = Grid(grid: grid1)
-//println(grid)
+println(grid)
 
-/* C2 */
-println(grid.units(2*9 + 1))
-println(grid.units(4*9 + 1).count)
-println(grid.peers(2*9 + 1).sorted { $0 < $1 } )
-println(grid.peers(2*9 + 1).count)
-
- /* E5 */
-println(grid.units(4*9 + 4))
-println(grid.units(4*9 + 4).count)
-println(grid.peers(4*9 + 4).sorted { $0 < $1 })
-println(grid.peers(4*9 + 4).count)
+//println(grid.assign(grid.values, s: (2*9 + 1), d: Square(0b000000001)))

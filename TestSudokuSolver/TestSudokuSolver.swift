@@ -52,16 +52,61 @@ class TestSudokuSolver: XCTestCase {
         XCTAssertEqual("\(Square(0b101010101))", "13579")
     }
     
-    func testFromFile() {
-        let fileManager = NSFileManager()
-        fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
-        
-        XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
-        XCTAssertEqual(fromFile("hardest.txt").count,11)
-        XCTAssertEqual(fromFile("top95.txt").count,95)
+    func testSquareCount() {
+        XCTAssertEqual(Square().count, 0)
+        XCTAssertEqual(Square(0).count,0)
+        XCTAssertEqual(Square(0b000000001).count, 1)
+        XCTAssertEqual(Square(0b000000010).count, 1)
+        XCTAssertEqual(Square(0b000000100).count, 1)
+        XCTAssertEqual(Square(0b000001000).count, 1)
+        XCTAssertEqual(Square(0b000010000).count, 1)
+        XCTAssertEqual(Square(0b000100000).count, 1)
+        XCTAssertEqual(Square(0b001000000).count, 1)
+        XCTAssertEqual(Square(0b010000000).count, 1)
+        XCTAssertEqual(Square(0b100000000).count, 1)
+        XCTAssertEqual(Square(0b000000011).count, 2)
+        XCTAssertEqual(Square(0b000000111).count, 3)
+        XCTAssertEqual(Square(0b000001111).count, 4)
+        XCTAssertEqual(Square(0b000011111).count, 5)
+        XCTAssertEqual(Square(0b000111111).count, 6)
+        XCTAssertEqual(Square(0b001111111).count, 7)
+        XCTAssertEqual(Square(0b011111111).count, 8)
+        XCTAssertEqual(Square(0b111111111).count, 9)
+        XCTAssertEqual(Square(0b010101010).count, 4)
+        XCTAssertEqual(Square(0b101010101).count, 5)
     }
     
-    func testUnits() {
+    func testSquareHasMember() {
+        for member in 1...9 {
+            let mask = UInt16(1 << (member - 1))
+            XCTAssertFalse(Square().hasMember(member))
+            XCTAssert(Square(mask).hasMember(member))
+        }
+    }
+    
+    func testSquareAddMember() {
+        var square = Square(0)
+        XCTAssertEqual(square.count, 0)
+        
+        for member in 1...9 {
+            square.addMember(member)
+            XCTAssert(square.hasMember(member))
+            XCTAssertEqual(square.count, member)
+        }
+    }
+    
+    func testSquareRemoveMember() {
+        var square = Square(0b111111111)
+        XCTAssertEqual(square.count, 9)
+        
+        for member in 1...9 {
+            square.removeMember(member)
+            XCTAssertFalse(square.hasMember(member))
+            XCTAssertEqual(square.count, 9 - member)
+        }
+    }
+    
+    func testGridUnits() {
         let grid = Grid(grid: "")
         
         /* Square 'C2' */
@@ -79,7 +124,7 @@ class TestSudokuSolver: XCTestCase {
                 [30, 31, 32, 39, 40, 41, 48, 49, 50]])
     }
     
-    func testPeers() {
+    func testGridPeers() {
         let grid = Grid(grid: "")
         
         /* Square 'C2' */
@@ -91,5 +136,14 @@ class TestSudokuSolver: XCTestCase {
         XCTAssertEqual(grid.peers(4*9 + 4).count, 20)
         XCTAssertEqual(grid.peers(4*9 + 4).sorted { $0 < $1 },
             [4, 13, 22, 30, 31, 32, 36, 37, 38, 39, 41, 42, 43, 44, 48, 49, 50, 58, 67, 76])
+    }
+    
+    func testFromFile() {
+        let fileManager = NSFileManager()
+        fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
+        
+        XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
+        XCTAssertEqual(fromFile("hardest.txt").count,11)
+        XCTAssertEqual(fromFile("top95.txt").count,95)
     }
 }

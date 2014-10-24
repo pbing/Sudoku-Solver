@@ -10,7 +10,7 @@ import Foundation
 
 struct Grid: Printable {
     let rows = 9, columns = 9
-    var values: [Square] = []
+    var values = [Square]()
     
     func indexIsValid(row: Int, column: Int) -> Bool {
         return row >= 0 && row < rows && column >= 0 && column < columns
@@ -28,6 +28,7 @@ struct Grid: Printable {
         }
     }
     
+    /* Return description for protocol Printable. */
     var description: String {
         /* Convert to NSString in order to determine the string length. */
         let values = map(self.values) { NSString(string: "\($0)") }
@@ -46,9 +47,9 @@ struct Grid: Printable {
         let line = "+".join([lineSegment,lineSegment,lineSegment])
         
         /* Build table grid */
-        var row: [String] = []
+        var row = [String]()
         for r in 0..<rows {
-            var col: [String] = []
+            var col = [String]()
             
             for i in 0..<columns {
                 col.append(values[r * columns + i].stringByPaddingToLength(maxLen, withString: " ", startingAtIndex: 0))
@@ -67,15 +68,15 @@ struct Grid: Printable {
     }
     
     /* Convert grid into an array of Squares with '0' or '.' for empties. */
-    func gridValue(grid: String) -> [Square] {
-        var res: [Square] = []
+    func gridValues(grid: String) -> [Square] {
+        var res = [Square]()
         for c in grid {
             switch c {
             case "0",".":
-                res.append(Square(0))
+                res.append(Square(0b111111111))
             default:
                 if let d = String(c).toInt() {
-                    res.append(Square(1 << (d - 1)))
+                    res.append(Square(UInt16(1 << (d - 1))))                  
                 }
             }
         }
@@ -83,7 +84,7 @@ struct Grid: Printable {
     }
     
     init(grid: String) {
-        values = gridValue(grid)
+        values = gridValues(grid)
     }
     
     /* A unit are the columns 1-9, the rows A-I and
@@ -91,14 +92,14 @@ struct Grid: Printable {
     func units(index: Int) -> [[Int]] {
         /* same row */
         var row = index / columns
-        var rowUnits: [Int] = []
+        var rowUnits = [Int]()
         for column in 0..<columns {
             rowUnits.append(row * columns + column)
         }
         
         /* same column */
         var column = index % rows
-        var columnUnits: [Int] = []
+        var columnUnits = [Int]()
         for row in 0..<columns {
             columnUnits.append(row * columns + column)
         }
@@ -106,7 +107,7 @@ struct Grid: Printable {
         /* 3x3 box */
         row = 3 * (index / (3 * columns))
         column = 3 * ((index % rows) / 3)
-        var boxUnits: [Int] = []
+        var boxUnits = [Int]()
         for r in 0..<3 {
             for c in 0..<3 {
                 boxUnits.append((row + r) * columns + (column + c))
@@ -116,6 +117,7 @@ struct Grid: Printable {
         return [rowUnits, columnUnits, boxUnits]
     }
     
+    /* The peers are the squares that share a unit. */
     func peers(index: Int) -> [Int] {
         var peers = NSMutableSet(capacity: 20)
         
@@ -133,7 +135,7 @@ struct Grid: Printable {
             if i != index { peers.addObject(i) }
         }
         
-        /* 3x3 square */
+        /* 3x3 box */
         row = 3 * (index / (3 * columns))
         column = 3 * ((index % rows) / 3)
         for r in 0..<3 {
@@ -143,10 +145,22 @@ struct Grid: Printable {
             }
         }
         
-        var res: [Int] = []
+        var res = [Int]()
         for i in peers.allObjects {
             res.append(i as Int)
         }
         return res
+    }
+    
+    /* Eliminate all the other values (except d) from values[s] and propagate.
+    Return values, except return False if a contradiction is detected. */
+    func assign(values: [Square], index: Int, member: Int) -> [Square]? {
+        return nil
+    }
+    
+    /* Eliminate d from values[s]; propagate when values or places <= 2.
+    Return values, except return False if a contradiction is detected. */
+    func eliminate(values: [Square], s: Int, d: Square) -> [Square]? {
+        return nil
     }
 }

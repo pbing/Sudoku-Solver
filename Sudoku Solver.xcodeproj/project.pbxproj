@@ -17,6 +17,8 @@
 		7336A75419F93BEC00F2F2AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A71919F913D600F2F2AB /* main.swift */; };
 		7336A75619F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
 		7336A75719F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
+		73C4E7CB19FA8CDE00E0483F /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C4E7CA19FA8CDE00E0483F /* utilities.swift */; };
+		73C4E7CC19FA8CDE00E0483F /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C4E7CA19FA8CDE00E0483F /* utilities.swift */; };
 		73C55DF419F9BD7900F57C92 /* sudoku.py in Resources */ = {isa = PBXBuildFile; fileRef = 73C55DF319F9BD7900F57C92 /* sudoku.py */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,7 @@
 		7336A74E19F9297800F2F2AB /* hardest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hardest.txt; sourceTree = "<group>"; };
 		7336A74F19F9297800F2F2AB /* top95.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = top95.txt; sourceTree = "<group>"; };
 		7336A75519F942B700F2F2AB /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		73C4E7CA19FA8CDE00E0483F /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		73C55DF319F9BD7900F57C92 /* sudoku.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = sudoku.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +91,7 @@
 				7336A75519F942B700F2F2AB /* Grid.swift */,
 				7336A72019F913F800F2F2AB /* Square.swift */,
 				7336A71919F913D600F2F2AB /* main.swift */,
+				73C4E7CA19FA8CDE00E0483F /* utilities.swift */,
 				7336A75319F929A000F2F2AB /* Puzzles */,
 			);
 			path = "Sudoku Solver";
@@ -214,6 +218,7 @@
 			files = (
 				7336A72119F913F800F2F2AB /* Square.swift in Sources */,
 				7336A71A19F913D600F2F2AB /* main.swift in Sources */,
+				73C4E7CB19FA8CDE00E0483F /* utilities.swift in Sources */,
 				7336A75619F942B700F2F2AB /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7336A74C19F9273900F2F2AB /* Square.swift in Sources */,
+				73C4E7CC19FA8CDE00E0483F /* utilities.swift in Sources */,
 				7336A74819F9268F00F2F2AB /* TestSudokuSolver.swift in Sources */,
 				7336A75419F93BEC00F2F2AB /* main.swift in Sources */,
 				7336A75719F942B700F2F2AB /* Grid.swift in Sources */,
