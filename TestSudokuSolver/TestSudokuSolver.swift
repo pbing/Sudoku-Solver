@@ -76,33 +76,33 @@ class TestSudokuSolver: XCTestCase {
         XCTAssertEqual(Square(0b101010101).count, 5)
     }
     
-    func testSquareHasMember() {
-        for member in 1...9 {
-            let mask = UInt16(1 << (member - 1))
-            XCTAssertFalse(Square().hasMember(member))
-            XCTAssert(Square(mask).hasMember(member))
+    func testSquareHasDigit() {
+        for digit in 1...9 {
+            let mask = UInt16(1 << (digit - 1))
+            XCTAssertFalse(Square().hasDigit(digit))
+            XCTAssert(Square(mask).hasDigit(digit))
         }
     }
     
-    func testSquareAddMember() {
+    func testSquareAddDigit() {
         var square = Square(0)
         XCTAssertEqual(square.count, 0)
         
-        for member in 1...9 {
-            square.addMember(member)
-            XCTAssert(square.hasMember(member))
-            XCTAssertEqual(square.count, member)
+        for digit in 1...9 {
+            square.addDigit(digit)
+            XCTAssert(square.hasDigit(digit))
+            XCTAssertEqual(square.count, digit)
         }
     }
     
-    func testSquareRemoveMember() {
+    func testSquareRemoveDigit() {
         var square = Square(0b111111111)
         XCTAssertEqual(square.count, 9)
         
-        for member in 1...9 {
-            square.removeMember(member)
-            XCTAssertFalse(square.hasMember(member))
-            XCTAssertEqual(square.count, 9 - member)
+        for digit in 1...9 {
+            square.removeDigit(digit)
+            XCTAssertFalse(square.hasDigit(digit))
+            XCTAssertEqual(square.count, 9 - digit)
         }
     }
     

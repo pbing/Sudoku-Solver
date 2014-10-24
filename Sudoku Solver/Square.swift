@@ -32,7 +32,7 @@ struct Square: Printable {
         }
     }
 
-    /* Return the number of set members in value. */
+    /* Return the number of set digits in value. */
     var count: Int {
         var val = value
         var count: Int
@@ -43,27 +43,27 @@ struct Square: Printable {
         return count
     }
     
-    func toMask(member: Int) -> UInt16 {
-        assert(member >= 1 && member <= 9, "Index out of range.")
-        return UInt16(1 << (member - 1))
+    func toMask(digit: Int) -> UInt16 {
+        assert(digit >= 1 && digit <= 9, "Index out of range.")
+        return UInt16(1 << (digit - 1))
     }
     
-    func hasMember(member: Int) -> Bool {
-        return (value & toMask(member)) != 0
+    func hasDigit(digit: Int) -> Bool {
+        return (value & toMask(digit)) != 0
     }
     
-    mutating func addMember(member: Int) {
-        value |= toMask(member)
+    mutating func addDigit(digit: Int) {
+        value |= toMask(digit)
      }
 
-    mutating func removeMember(member: Int) {
-        value &= ~toMask(member)
+    mutating func removeDigit(digit: Int) {
+        value &= ~toMask(digit)
      }
     
-    var members: [Int] {
+    var digits: [Int] {
         var res = [Int]()
         for i in 1...9 {
-            if hasMember(i) {
+            if hasDigit(i) {
                 res.append(i)
             }
         }

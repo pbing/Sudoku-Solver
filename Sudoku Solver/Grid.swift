@@ -77,7 +77,7 @@ struct Grid: Printable {
         let intValues = gridValues(grid)
         for i in 0..<(rows * columns) {
             if intValues[i] > 0 {
-                if assign(i, member: intValues[i]) == nil {
+                if assign(i, d: intValues[i]) == nil {
                     values = [] // Fail if we can't assign value to square i.
                 }
             }
@@ -86,24 +86,24 @@ struct Grid: Printable {
     
     /* A unit are the columns 1-9, the rows A-I and
     a collection of nine squares. */
-    func units(index: Int) -> [[Int]] {
+    func units(s: Int) -> [[Int]] {
         /* same row */
-        var row = index / columns
+        var row = s / columns
         var rowUnits = [Int]()
         for column in 0..<columns {
             rowUnits.append(row * columns + column)
         }
         
         /* same column */
-        var column = index % rows
+        var column = s % rows
         var columnUnits = [Int]()
         for row in 0..<columns {
             columnUnits.append(row * columns + column)
         }
         
         /* 3x3 box */
-        row = 3 * (index / (3 * columns))
-        column = 3 * ((index % rows) / 3)
+        row = 3 * (s / (3 * columns))
+        column = 3 * ((s % rows) / 3)
         var boxUnits = [Int]()
         for r in 0..<3 {
             for c in 0..<3 {
@@ -115,30 +115,30 @@ struct Grid: Printable {
     }
     
     /* The peers are the squares that share a unit. */
-    func peers(index: Int) -> [Int] {
+    func peers(s: Int) -> [Int] {
         var peers = NSMutableSet(capacity: 20)
         
         /* same row */
-        var row = index / columns
+        var row = s / columns
         for column in 0..<columns {
             let i = row * columns + column
-            if i != index { peers.addObject(i) }
+            if i != s { peers.addObject(i) }
         }
         
         /* same column */
-        var column = index % rows
+        var column = s % rows
         for row in 0..<columns {
             let i = row * columns + column
-            if i != index { peers.addObject(i) }
+            if i != s { peers.addObject(i) }
         }
         
         /* 3x3 box */
-        row = 3 * (index / (3 * columns))
-        column = 3 * ((index % rows) / 3)
+        row = 3 * (s / (3 * columns))
+        column = 3 * ((s % rows) / 3)
         for r in 0..<3 {
             for c in 0..<3 {
                 let i = (row + r) * columns + (column + c)
-                if i != index { peers.addObject(i) }
+                if i != s { peers.addObject(i) }
             }
         }
         
@@ -151,12 +151,12 @@ struct Grid: Printable {
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
     Return values, except return nil if a contradiction is detected. */
-    mutating func assign(index: Int, member: Int) -> [Square]? {
-        var otherValues = values[index]
-        otherValues.removeMember(member)
+    mutating func assign(s: Int, d: Int) -> [Square]? {
+        var otherValues = values[s]
+        otherValues.removeDigit(d)
         
-        for d2 in otherValues.members {
-            if eliminate(index, member: d2) == nil {
+        for d2 in otherValues.digits {
+            if eliminate(s, d: d2) == nil {
                 return nil
             }
         }
@@ -165,27 +165,27 @@ struct Grid: Printable {
     
     /* Eliminate d from values[s]; propagate when values or places <= 2.
     Return values, except return nil if a contradiction is detected. */
-    mutating func eliminate(index: Int, member: Int) -> [Square]? {
-        if !values[index].hasMember(member) {
+    mutating func eliminate(s: Int, d: Int) -> [Square]? {
+        if !values[s].hasDigit(d) {
             return values // Already eliminated
         }
-        values[index].removeMember(member)
+        values[s].removeDigit(d)
         
         /* (1) If a square s is reduced to one value d2, then eliminate d2 from the peers. */
-        let count = values[index].count
+        let count = values[s].count
         if count == 0 {
             return nil // Contradiction: removed last value
         } else if count == 1 {
-            let d2 = values[index].members[0]
-            for s2 in peers(index) {
-                if eliminate(s2, member: d2) == nil {
+            let d2 = values[s].digits[0]
+            for s2 in peers(s) {
+                if eliminate(s2, d: d2) == nil {
                     return nil
                 }
             }
         }
         
         /* (2) If a unit u is reduced to only one place for a value d, then put it there. */
-        for u in units(index) {
+        for u in units(s) {
             // TODO
         }
         
