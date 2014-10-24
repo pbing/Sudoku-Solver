@@ -51,7 +51,7 @@ struct Grid: Printable {
         return "\n\(line)\n".join([r0,r1,r2])
     }
     
-    /* Convert grid into an array of Squares with '0' or '.' for empties. */
+    /* Convert grid into an array of Int with '0' or '.' for empties. */
     func gridValues(grid: String) -> [Int] {
         var res = [Int]()
         for c in grid {
@@ -150,7 +150,7 @@ struct Grid: Printable {
     }
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
-    Return values, except return False if a contradiction is detected. */
+    Return values, except return nil if a contradiction is detected. */
     mutating func assign(index: Int, member: Int) -> [Square]? {
         var otherValues = values[index]
         otherValues.removeMember(member)
@@ -164,7 +164,7 @@ struct Grid: Printable {
     }
     
     /* Eliminate d from values[s]; propagate when values or places <= 2.
-    Return values, except return False if a contradiction is detected. */
+    Return values, except return nil if a contradiction is detected. */
     mutating func eliminate(index: Int, member: Int) -> [Square]? {
         if !values[index].hasMember(member) {
             return values // Already eliminated
