@@ -59,4 +59,14 @@ struct Square: Printable {
     mutating func removeMember(member: Int) {
         value &= ~toMask(member)
      }
+    
+    var members: [Int] {
+        var res = [Int]()
+        for i in 1...9 {
+            if hasMember(i) {
+                res.append(i)
+            }
+        }
+        return res
+    }
 }

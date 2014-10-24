@@ -12,22 +12,6 @@ struct Grid: Printable {
     let rows = 9, columns = 9
     var values = [Square]()
     
-    func indexIsValid(row: Int, column: Int) -> Bool {
-        return row >= 0 && row < rows && column >= 0 && column < columns
-    }
-    
-    subscript(row: Int, column: Int) -> Square {
-        get {
-            assert(indexIsValid(row, column: column), "Index out of range.")
-            return values[(row * columns + column)]
-        }
-        
-        set {
-            assert(indexIsValid(row, column: column), "Index out of range.")
-            values[(row * columns + column)] = newValue
-        }
-    }
-    
     /* Return description for protocol Printable. */
     var description: String {
         /* Convert to NSString in order to determine the string length. */
@@ -68,15 +52,15 @@ struct Grid: Printable {
     }
     
     /* Convert grid into an array of Squares with '0' or '.' for empties. */
-    func gridValues(grid: String) -> [Square] {
-        var res = [Square]()
+    func gridValues(grid: String) -> [Int] {
+        var res = [Int]()
         for c in grid {
             switch c {
             case "0",".":
-                res.append(Square(0b111111111))
+                res.append(0)
             default:
                 if let d = String(c).toInt() {
-                    res.append(Square(UInt16(1 << (d - 1))))                  
+                    res.append(d)
                 }
             }
         }
@@ -84,7 +68,17 @@ struct Grid: Printable {
     }
     
     init(grid: String) {
-        values = gridValues(grid)
+        for i in 0..<(rows * columns) {
+            values.append(Square(0x1ff))
+        }
+        
+        let intValues = gridValues(grid)
+        
+        for i in 0..<(rows * columns) {
+            if intValues[i] > 0 {
+                assign(i, member: intValues[i])
+            }
+        }
     }
     
     /* A unit are the columns 1-9, the rows A-I and
@@ -154,13 +148,45 @@ struct Grid: Printable {
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
     Return values, except return False if a contradiction is detected. */
-    func assign(values: [Square], index: Int, member: Int) -> [Square]? {
-        return nil
+    mutating func assign(index: Int, member: Int) -> [Square]? {
+        var otherValues = values[index]
+        otherValues.removeMember(member)
+        //println("assign.otherValues = \(otherValues)")
+        
+        for d2 in otherValues.members {
+            if eliminate(index, member: d2) == nil {
+                return nil
+            }
+        }
+        return values
     }
     
     /* Eliminate d from values[s]; propagate when values or places <= 2.
     Return values, except return False if a contradiction is detected. */
-    func eliminate(values: [Square], s: Int, d: Square) -> [Square]? {
-        return nil
+    mutating func eliminate(index: Int, member: Int) -> [Square]? {
+        if !values[index].hasMember(member) {
+            return values // Already eliminated
+        }
+        values[index].removeMember(member)
+        
+        /* (1) If a square s is reduced to one value d2, then eliminate d2 from the peers. */
+        let count = values[index].count
+        if count == 0 {
+            return nil // Contradiction: removed last value
+        } else if count == 1 {
+            let d2 = values[index].members[0]
+            for s2 in peers(index) {
+                if eliminate(s2, member: d2) == nil {
+                    return nil
+                }
+            }
+        }
+        
+        /* (2) If a unit u is reduced to only one place for a value d, then put it there. */
+        for u in units(index) {
+            // TODO
+        }
+        
+        return values
     }
 }

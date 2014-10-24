@@ -92,6 +92,7 @@
 				7336A72019F913F800F2F2AB /* Square.swift */,
 				7336A71919F913D600F2F2AB /* main.swift */,
 				73C4E7CA19FA8CDE00E0483F /* utilities.swift */,
+				73C4E7CD19FAE78100E0483F /* Python */,
 				7336A75319F929A000F2F2AB /* Puzzles */,
 			);
 			path = "Sudoku Solver";
@@ -117,12 +118,19 @@
 		7336A75319F929A000F2F2AB /* Puzzles */ = {
 			isa = PBXGroup;
 			children = (
-				73C55DF319F9BD7900F57C92 /* sudoku.py */,
 				7336A74D19F9297800F2F2AB /* easy50.txt */,
 				7336A74E19F9297800F2F2AB /* hardest.txt */,
 				7336A74F19F9297800F2F2AB /* top95.txt */,
 			);
 			name = Puzzles;
+			sourceTree = "<group>";
+		};
+		73C4E7CD19FAE78100E0483F /* Python */ = {
+			isa = PBXGroup;
+			children = (
+				73C55DF319F9BD7900F57C92 /* sudoku.py */,
+			);
+			name = Python;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
