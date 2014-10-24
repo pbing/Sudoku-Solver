@@ -20,13 +20,11 @@ struct Grid: Printable {
         get {
             assert(indexIsValid(row, column: column), "Index out of range.")
             return values[(row * columns + column)]
-            
         }
         
         set {
             assert(indexIsValid(row, column: column), "Index out of range.")
             values[(row * columns + column)] = newValue
-            
         }
     }
     
@@ -71,19 +69,16 @@ struct Grid: Printable {
     /* Convert grid into an array of Squares with '0' or '.' for empties. */
     func gridValue(grid: String) -> [Square] {
         var res: [Square] = []
-        
         for c in grid {
             switch c {
             case "0",".":
                 res.append(Square(0))
-                
             default:
                 if let d = String(c).toInt() {
                     res.append(Square(1 << (d - 1)))
                 }
             }
         }
-        
         return res
     }
     
@@ -122,19 +117,20 @@ struct Grid: Printable {
     }
     
     func peers(index: Int) -> [Int] {
-        var peers: [Int] = []
+        var peers = NSMutableSet(capacity: 20)
+        
         /* same row */
         var row = index / columns
         for column in 0..<columns {
             let i = row * columns + column
-            if i != index { peers.append(i) }
+            if i != index { peers.addObject(i) }
         }
         
         /* same column */
         var column = index % rows
         for row in 0..<columns {
             let i = row * columns + column
-            if i != index { peers.append(i) }
+            if i != index { peers.addObject(i) }
         }
         
         /* 3x3 square */
@@ -143,9 +139,14 @@ struct Grid: Printable {
         for r in 0..<3 {
             for c in 0..<3 {
                 let i = (row + r) * columns + (column + c)
-                if i != index { peers.append(i) }
+                if i != index { peers.addObject(i) }
             }
         }
-        return peers
+        
+        var res: [Int] = []
+        for i in peers.allObjects {
+            res.append(i as Int)
+        }
+        return res
     }
 }

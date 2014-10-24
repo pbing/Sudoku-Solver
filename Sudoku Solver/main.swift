@@ -28,12 +28,16 @@ let grid2 = fromFile("easy50.txt", separator: "========")[1]
 let grid3 = fromFile("top95.txt")[94]
 
 let grid = Grid(grid: grid1)
-println(grid)
+//println(grid)
 
 /* C2 */
-/*println(grid.units(2*9 + 1))
-println(grid.units(4*9 + 1).count)*/
+println(grid.units(2*9 + 1))
+println(grid.units(4*9 + 1).count)
+println(grid.peers(2*9 + 1).sorted { $0 < $1 } )
+println(grid.peers(2*9 + 1).count)
 
  /* E5 */
 println(grid.units(4*9 + 4))
 println(grid.units(4*9 + 4).count)
+println(grid.peers(4*9 + 4).sorted { $0 < $1 })
+println(grid.peers(4*9 + 4).count)

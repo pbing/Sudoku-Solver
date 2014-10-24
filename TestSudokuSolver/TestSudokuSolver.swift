@@ -84,16 +84,12 @@ class TestSudokuSolver: XCTestCase {
         
         /* Square 'C2' */
         XCTAssertEqual(grid.peers(2*9 + 1).count, 20)
-        XCTAssertEqual(grid.peers(2*9 + 1), [19,
-            18, 20, 21, 22, 23, 24, 25, 26,
-            1, 10, 28, 37, 46, 55, 64, 73,
-            0, 1, 2, 9, 10, 11, 18, 20])
+        XCTAssertEqual(grid.peers(2*9 + 1).sorted { $0 < $1 },
+            [0, 1, 2, 9, 10, 11, 18, 20, 21, 22, 23, 24, 25, 26, 28, 37, 46, 55, 64, 73])
         
         /* Square 'E5' */
         XCTAssertEqual(grid.peers(4*9 + 4).count, 20)
-        XCTAssertEqual(grid.peers(4*9 + 4), [40,
-            36, 37, 38, 39, 41, 42, 43, 44,
-            4, 13, 22, 31, 49, 58, 67, 76,
-            30,31,32,39,41,48,49,50])
+        XCTAssertEqual(grid.peers(4*9 + 4).sorted { $0 < $1 },
+            [4, 13, 22, 30, 31, 32, 36, 37, 38, 39, 41, 42, 43, 44, 48, 49, 50, 58, 67, 76])
     }
 }
