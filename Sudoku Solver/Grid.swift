@@ -68,15 +68,18 @@ struct Grid: Printable {
     }
     
     init(grid: String) {
+        /* To start, every square can be any digit */
         for i in 0..<(rows * columns) {
             values.append(Square(0x1ff))
         }
         
+        /* Then assign values from the grid. */
         let intValues = gridValues(grid)
-        
         for i in 0..<(rows * columns) {
             if intValues[i] > 0 {
-                assign(i, member: intValues[i])
+                if assign(i, member: intValues[i]) == nil {
+                    values = [] // Fail if we can't assign value to square i.
+                }
             }
         }
     }
@@ -151,7 +154,6 @@ struct Grid: Printable {
     mutating func assign(index: Int, member: Int) -> [Square]? {
         var otherValues = values[index]
         otherValues.removeMember(member)
-        //println("assign.otherValues = \(otherValues)")
         
         for d2 in otherValues.members {
             if eliminate(index, member: d2) == nil {
