@@ -44,6 +44,10 @@ therefore in the double recursive functions eliminate() and assign().
 The function eliminate() uses units() and peers() wherein most time is
 spent in the Array.append() methods.
 
+The 30.6 % of __allocating_init() came from the fact that init() uses
+also assign() when the squares are placed and constrained for the
+first time.
+
 
 ### top_level_code():
 
@@ -81,4 +85,4 @@ spent in the Array.append() methods.
 |  6.9 %       | units()                                              |
 |  5.3 %       | Swift._ContiguousArrayStorage.__dealocating_deinit() |
 |  4.3 %       | peers()                                              |
-|  1.6 %       | \<Swift Int\>: Swift.Array.append()                    |
+|  1.6 %       | \<Swift Int\>: Swift.Array.append()                  |
