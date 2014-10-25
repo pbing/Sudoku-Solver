@@ -89,25 +89,28 @@ class Grid: Printable {
     func units(s: Int) -> [[Int]] {
         /* same row */
         var row = s / columns
-        var rowUnits = [Int]()
+        var rowUnits = [Int](count: columns, repeatedValue: 0)
+        var i = 0
         for column in 0..<columns {
-            rowUnits.append(row * columns + column)
+            rowUnits[i++] = row * columns + column
         }
         
         /* same column */
         var column = s % rows
-        var columnUnits = [Int]()
-        for row in 0..<columns {
-            columnUnits.append(row * columns + column)
+        var columnUnits = [Int](count: rows, repeatedValue: 0)
+        i = 0
+        for row in 0..<rows {
+            columnUnits[i++] = row * columns + column
         }
         
         /* 3x3 box */
         row = 3 * (s / (3 * columns))
         column = 3 * ((s % rows) / 3)
-        var boxUnits = [Int]()
+        var boxUnits = [Int](count: 3 * 3, repeatedValue: 0)
         for r in 0..<3 {
             for c in 0..<3 {
-                boxUnits.append((row + r) * columns + (column + c))
+                let i = r * 3 + c
+                boxUnits[i] = (row + r) * columns + (column + c)
             }
         }
         
@@ -142,9 +145,10 @@ class Grid: Printable {
             }
         }
         
-        var res = [Int]()
+        var res = [Int](count: 20, repeatedValue: 0)
+        var j = 0
         for i in peers.allObjects {
-            res.append(i as Int)
+            res[j++] = i as Int
         }
         return res
     }
