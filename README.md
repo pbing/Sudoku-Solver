@@ -3,7 +3,7 @@
 Swift implementation of Peter Norvig's [constraint based solver](http://norvig.com/sudoku.html).
 
 
-## Benchmarks
+## Benchmarks (master branch)
 
 The original Python program has been compared with the Swift debug and
 release version.
@@ -91,3 +91,36 @@ first time.
 |  5.3 %       | Swift._ContiguousArrayStorage.__dealocating_deinit() |
 |  4.3 %       | peers()                                              |
 |  1.6 %       | \<Swift Int\>: Swift.Array.append()                  |
+
+
+## Benchmarks (performance branch)
+
+* replaced Array.append in unit() and peers() (- 50.2 %)
+
+
+### Easy Puzzles (easy50.txt)
+
+
+|           | Python | Swift (Release) |
+|-----------|--------|-----------------|
+| average   |  0.01  | 0.036           |
+| maximum   |  0.01  | 0.043           |
+| frequency |  199   | 27              |
+
+
+### Hard Puzzles (top95.txt)
+
+|           | Python | Swift (Release) |
+|-----------|--------|-----------------|
+| average   |  0.02  | 0.12            |
+| maximum   |  0.09  | 0.53            |
+| frequency |  56    | 8.6             |
+
+
+### Hardes Puzzles (hardest.txt)
+
+|           | Python | Swift (Release) |
+|-----------|--------|-----------------|
+| average   |  0.01  | 0.046           |
+| maximum   |  0.01  | 0.059           |
+| frequency |  151   | 22              |
