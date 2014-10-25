@@ -8,6 +8,8 @@ Swift implementation of Peter Norvig's [constraint based solver](http://norvig.c
 The original Python program has been compared with the Swift debug and
 release version.
 
+The average time and the maximum time (in seconds) of solving a Sudoku grid will be measured. Also, the number of solutions per second is calculated from the average time, this shows a better resolution for very short solving times.
+
 The release version of the Swift program is about 10 times faster than
 the debugging version. The original Python program runs about 14 times
 faster then the release version of the Swift program.
