@@ -5,7 +5,12 @@ Swift implementation of Peter Norvig's [constraint based solver](http://norvig.c
 
 ## Benchmarks
 
-The original Python program will be compared with the Swift debug and release version.
+The original Python program has been compared with the Swift debug and
+release version.
+
+The release version of the Swift program is about 10 times faster than
+the debugging version. The original Python program runs about 14 times
+faster then the release version of the Swift program.
 
 
 ### Easy Puzzles (easy50.txt)
