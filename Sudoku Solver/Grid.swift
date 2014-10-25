@@ -127,7 +127,7 @@ class Grid: Printable {
         
         /* same column */
         var column = s % rows
-        for row in 0..<columns {
+        for row in 0..<rows {
             let i = row * columns + column
             if i != s { peers.addObject(i) }
         }
