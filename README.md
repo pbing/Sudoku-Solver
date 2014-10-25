@@ -95,7 +95,7 @@ first time.
 
 ## Benchmarks (performance branch)
 
-* replaced Array.append in unit() and peers() (- 50.2 %)
+* replaced Array.append in unit() and peers() ( -50.2 %)
 
 
 ### Easy Puzzles (easy50.txt)
