@@ -21,10 +21,12 @@ class TestSudokuSolver: XCTestCase {
         super.tearDown()
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testPerformanceSolve() {
         self.measureBlock() {
-            // Put the code you want to measure the time of here.
+            let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
+            let grid2 = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......"
+            solve(grid1)
+            solve(grid2)
         }
     }
     
