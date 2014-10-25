@@ -14,7 +14,6 @@
 		7336A75019F9297800F2F2AB /* easy50.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74D19F9297800F2F2AB /* easy50.txt */; };
 		7336A75119F9297800F2F2AB /* hardest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74E19F9297800F2F2AB /* hardest.txt */; };
 		7336A75219F9297800F2F2AB /* top95.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7336A74F19F9297800F2F2AB /* top95.txt */; };
-		7336A75419F93BEC00F2F2AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A71919F913D600F2F2AB /* main.swift */; };
 		7336A75619F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
 		7336A75719F942B700F2F2AB /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336A75519F942B700F2F2AB /* Grid.swift */; };
 		73C4E7CB19FA8CDE00E0483F /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C4E7CA19FA8CDE00E0483F /* utilities.swift */; };
@@ -238,7 +237,6 @@
 				7336A74C19F9273900F2F2AB /* Square.swift in Sources */,
 				73C4E7CC19FA8CDE00E0483F /* utilities.swift in Sources */,
 				7336A74819F9268F00F2F2AB /* TestSudokuSolver.swift in Sources */,
-				7336A75419F93BEC00F2F2AB /* main.swift in Sources */,
 				7336A75719F942B700F2F2AB /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

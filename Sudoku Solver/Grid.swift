@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Grid: Printable {
+class Grid: Printable {
     let rows = 9, columns = 9
     var values = [Square]()
     
@@ -48,7 +48,7 @@ struct Grid: Printable {
         let r0 = "\n".join(row[0...2])
         let r1 = "\n".join(row[3...5])
         let r2 = "\n".join(row[6...8])
-        return "\n\(line)\n".join([r0,r1,r2])
+        return "\n\(line)\n".join([r0,r1,r2]) + "\n"
     }
     
     /* Convert grid into an array of Int with '0' or '.' for empties. */
@@ -151,7 +151,7 @@ struct Grid: Printable {
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
     Return values, except return nil if a contradiction is detected. */
-    mutating func assign(s: Int, d: Int) -> [Square]? {
+    func assign(s: Int, d: Int) -> [Square]? {
         var otherValues = values[s]
         otherValues.removeDigit(d)
         
@@ -163,7 +163,7 @@ struct Grid: Printable {
     
     /* Eliminate d from values[s]; propagate when values or places <= 2.
     Return values, except return nil if a contradiction is detected. */
-    mutating func eliminate(s: Int, d: Int) -> [Square]? {
+    func eliminate(s: Int, d: Int) -> [Square]? {
         if !values[s].hasDigit(d) {
             return values // Already eliminated
         }
@@ -194,5 +194,35 @@ struct Grid: Printable {
             }
         }
         return values
+    }
+    
+    var solved: Bool {
+        for s in values {
+            if s.count != 1 { return false }
+        }
+        return true
+    }
+    
+    /* Using depth-first search and propagation, try all possible values. */
+    func search(values: [Square]) -> [Square]? {
+        if solved { return values } // Solved!
+        
+        /* Chose the unfilled square s with the fewest possibilities */
+        var minCount = Int.max
+        var s = 0
+        for i in 0..<(rows * columns) {
+            let count = values[i].count
+            if count > 1 && count < minCount {
+                minCount = count
+                s = i
+            }
+        }
+        
+        for d in values[s].digits {
+            let values = self.values
+            if var values2 = assign(s, d: d) { search(values2) }
+            if !solved {  self.values = values }
+        }
+        return nil
     }
 }

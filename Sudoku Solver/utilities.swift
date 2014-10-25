@@ -21,3 +21,10 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
     return res
 }
 
+/* Solve grid */
+func solve(grid: String) -> Grid {
+    var g = Grid(grid: grid)
+    g.search(g.values)
+    return g
+}
+
