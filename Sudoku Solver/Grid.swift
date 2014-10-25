@@ -156,9 +156,7 @@ struct Grid: Printable {
         otherValues.removeDigit(d)
         
         for d2 in otherValues.digits {
-            if eliminate(s, d: d2) == nil {
-                return nil
-            }
+            if eliminate(s, d: d2) == nil { return nil }
         }
         return values
     }
@@ -173,22 +171,28 @@ struct Grid: Printable {
         
         /* (1) If a square s is reduced to one value d2, then eliminate d2 from the peers. */
         let count = values[s].count
-        if count == 0 {
-            return nil // Contradiction: removed last value
-        } else if count == 1 {
+        if count == 0 { return nil } // Contradiction: removed last value
+        else if count == 1 {
             let d2 = values[s].digits[0]
             for s2 in peers(s) {
-                if eliminate(s2, d: d2) == nil {
-                    return nil
-                }
+                if eliminate(s2, d: d2) == nil { return nil }
             }
         }
         
         /* (2) If a unit u is reduced to only one place for a value d, then put it there. */
         for u in units(s) {
-            // TODO
+            var dPlaces = [Int]()
+            for s in u {
+                if values[s].hasDigit(d) { dPlaces.append(s) }
+            }
+            
+            let count = dPlaces.count
+            if count == 0 { return nil } // Contradiction: no place for this value
+            else if count == 1 {
+                /* d can only be in one place in unit; assign it there */
+                if assign(dPlaces[0], d: d) == nil { return nil }
+            }
         }
-        
         return values
     }
 }
