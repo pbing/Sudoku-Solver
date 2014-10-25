@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreServices
 
 /* Parse a file into a list of strings, separated by separator. */
 func fromFile(fileName: String, separator: String = "\n") -> [String] {
@@ -28,3 +29,30 @@ func solve(grid: String) -> Grid {
     return g
 }
 
+/* Attempt to solve a sequence of grids. Report results.
+When showif is a number of seconds, display puzzles that take longer.
+When showif is None, don't display any puzzles.
+*/
+func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
+    var maxTime = UInt64.min
+    var sumTime = UInt64(0)
+    var n = 0, solved = 0
+
+    for grid in grids {
+        let startTime = mach_absolute_time()
+        var g = solve(grid)
+        
+        if solve(grid).solved { ++solved }
+        
+        if showIf { println(solve(grid)) }
+
+        let elapsedTime = mach_absolute_time() - startTime
+        maxTime = max(maxTime, elapsedTime)
+        sumTime += elapsedTime
+        ++n
+    }
+    
+    let realMaxTime = Double(maxTime) * 1.0e-9
+    let realTime = Double(sumTime) * 1.0e-9 / Double(n)
+    println("Solved \(solved) of \(n) \(name) puzzles (avg \(realTime) secs (\(1.0/realTime) Hz), max \(realMaxTime) secs).")
+}

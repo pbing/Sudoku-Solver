@@ -21,4 +21,8 @@ println(solve(grid2))
 println(solve(grid3))
 println(solve(grid4))
 */
-println(solve(grid2))
+
+solveAll(fromFile("easy50.txt", separator: "========"), name: "easy")
+solveAll(fromFile("top95.txt"), name: "hard")
+solveAll(fromFile("hardest.txt"), name: "hardest")
+
