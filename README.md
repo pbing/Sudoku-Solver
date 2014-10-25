@@ -81,4 +81,4 @@ spent in the Array.append() methods.
 |  6.9 %       | units()                                              |
 |  5.3 %       | Swift._ContiguousArrayStorage.__dealocating_deinit() |
 |  4.3 %       | peers()                                              |
-|  1.6 %       | <Swift Int>: Swift.Array.append()                    |
+|  1.6 %       | \<Swift Int\>: Swift.Array.append()                    |
