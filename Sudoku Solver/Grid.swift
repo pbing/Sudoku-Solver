@@ -149,12 +149,11 @@ class Grid: Printable {
     }
     
     /* Using depth-first search and propagation, try all possible values. */
-    func search(values: [Square]) -> [Square]? {
+    func search() -> [Square]? {
         if solved { return values } // Solved!
         
-        /* Chose the unfilled square s with the fewest possibilities */
-        var minCount = Int.max
-        var s = 0
+        /* Chose the unfilled square s with the fewest possibilities. */
+        var minCount = Int.max, s = 0
         for i in 0..<(rows * columns) {
             let count = values[i].count
             if count > 1 && count < minCount {
@@ -163,12 +162,13 @@ class Grid: Printable {
             }
         }
         
+        /* Try all possible values. */
         for d in values[s].digits {
             let values = self.values
-            if var values2 = assign(s, d: d) {
-                search(values2)
+            if assign(s, d: d) != nil {
+                search()
             }
-            if !solved {  self.values = values }
+            if !solved { self.values = values }
         }
         return nil
     }

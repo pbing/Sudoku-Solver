@@ -89,7 +89,7 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
 /* Solve grid */
 func solve(grid: String) -> Grid {
     var g = Grid(grid: grid)
-    g.search(g.values)
+    g.search()
     return g
 }
 
