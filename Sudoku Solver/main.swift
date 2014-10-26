@@ -16,10 +16,9 @@ for s in 0..<(rows * columns) {
     peers.append(squarePeers(s).allObjects as [Int])
 }
 
-
 /* added for profiling */
 let fileManager = NSFileManager()
-fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
+fileManager.changeCurrentDirectoryPath(currentDirectoryPath)
 
 /*
 let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"

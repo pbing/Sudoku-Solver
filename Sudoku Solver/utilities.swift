@@ -9,6 +9,8 @@
 import Foundation
 import CoreServices
 
+let currentDirectoryPath = "/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver"
+
 /* A unit are the columns 1-9, the rows A-I and
 a collection of nine squares. */
 func squareUnits(s: Int) -> [[Int]] {

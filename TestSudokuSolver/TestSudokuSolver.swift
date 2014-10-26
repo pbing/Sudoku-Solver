@@ -183,7 +183,7 @@ class TestSudokuSolver: XCTestCase {
     
     func testFromFile() {
         let fileManager = NSFileManager()
-        fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
+        fileManager.changeCurrentDirectoryPath(currentDirectoryPath)
         
         XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
         XCTAssertEqual(fromFile("hardest.txt").count,11)
