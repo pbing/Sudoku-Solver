@@ -9,7 +9,7 @@
 import Foundation
 
 struct Square: Printable {
-    var value = UInt16()
+    var value = UInt16(0)
     
     init(_ value: UInt16 = 0) {
         self.value = value
@@ -34,7 +34,6 @@ struct Square: Printable {
     var count: Int {
         var val = value
         var count: Int
-        
         for count = 0; val != 0; ++count {
             val &= val - 1 // clear the least significant bit set
         }

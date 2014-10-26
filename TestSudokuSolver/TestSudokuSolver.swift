@@ -116,7 +116,7 @@ class TestSudokuSolver: XCTestCase {
     
     func testUnits() {
         let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
-        let grid = Grid(grid: grid1)
+        let grid = Grid(grid1)
         
         /* Square 'C2' */
         XCTAssertEqual(units[2*9 + 1].count, 3)
@@ -135,7 +135,7 @@ class TestSudokuSolver: XCTestCase {
     
     func testPeers() {
         let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
-        let grid = Grid(grid: grid1)
+        let grid = Grid(grid1)
         
         /* Square 'C2' */
         XCTAssertEqual(peers[2*9 + 1].count, 20)
@@ -177,17 +177,17 @@ class TestSudokuSolver: XCTestCase {
             "5       6789    3      |2       479     1      |69      489     4689   \n" +
             "1       6789    4      |589     579     5789   |23569   23589   23689  \n"
 
-        XCTAssertEqual("\(Grid(grid: grid1))", expected1)
-        XCTAssertEqual("\(Grid(grid: grid2))", expected2)
+        XCTAssertEqual("\(Grid(grid1))", expected1)
+        XCTAssertEqual("\(Grid(grid2))", expected2)
     }
     
     func testFromFile() {
         let fileManager = NSFileManager()
         fileManager.changeCurrentDirectoryPath(currentDirectoryPath)
         
-        XCTAssertEqual(fromFile("easy50.txt", separator: "========").count,50)
-        XCTAssertEqual(fromFile("hardest.txt").count,11)
-        XCTAssertEqual(fromFile("top95.txt").count,95)
+        XCTAssertEqual(fromFile("easy50.txt", separator: "========").count, 50)
+        XCTAssertEqual(fromFile("hardest.txt").count, 11)
+        XCTAssertEqual(fromFile("top95.txt").count, 95)
     }
     
     func testSolve() {

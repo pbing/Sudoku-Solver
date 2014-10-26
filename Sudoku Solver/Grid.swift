@@ -8,13 +8,14 @@
 
 import Foundation
 
-/* Constants */
+/* Global constants */
 let rows = 9, columns = 9
 var units = [[[Int]]]()
 var peers = [[Int]]()
 
 class Grid: Printable {
-    var values = [Square]()
+    /* To start, every square can be any digit */
+    var values = [Square](count: rows * columns, repeatedValue: Square(0x1ff))
     
     /* Return description for protocol Printable. */
     var description: String {
@@ -71,13 +72,8 @@ class Grid: Printable {
         return res
     }
     
-    init(grid: String) {
-        /* To start, every square can be any digit */
-        for s in 0..<(rows * columns) {
-            values.append(Square(0x1ff))
-        }
-        
-        /* Then assign values from the grid. */
+    init(_ grid: String) {
+        /* Assign values from the grid. */
         let intValues = gridValues(grid)
         for i in 0..<(rows * columns) {
             if intValues[i] > 0 {
@@ -103,9 +99,8 @@ class Grid: Printable {
     /* Eliminate d from values[s]; propagate when values or places <= 2.
     Return values, except return nil if a contradiction is detected. */
     func eliminate(s: Int, d: Int) -> [Square]? {
-        if !values[s].hasDigit(d) {
-            return values // Already eliminated
-        }
+        if !values[s].hasDigit(d) { return values } // Already eliminated
+        
         values[s].removeDigit(d)
         
         /* (1) If a square s is reduced to one value d2, then eliminate d2 from the peers. */
@@ -127,16 +122,13 @@ class Grid: Printable {
                     ++dPlacesCount
                 }
             }
-            
-            if dPlacesCount == 0 {
-                return nil // Contradiction: no place for this value
-            }
+            if dPlacesCount == 0 { return nil } // Contradiction: no place for this value
             else if dPlacesCount == 1 {
+                
                 /* d can only be in one place in unit; assign it there */
                 if assign(dPlaces, d: d) == nil { return nil }
             }
         }
-        
         return values
     }
     
@@ -164,11 +156,11 @@ class Grid: Printable {
         
         /* Try all possible values. */
         for d in values[s].digits {
-            let values = self.values
+            let values = self.values // save state
             if assign(s, d: d) != nil {
                 search()
             }
-            if !solved { self.values = values }
+            if !solved { self.values = values } // restore state
         }
         return nil
     }

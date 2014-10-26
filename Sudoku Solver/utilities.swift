@@ -14,6 +14,7 @@ let currentDirectoryPath = "/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Sol
 /* A unit are the columns 1-9, the rows A-I and
 a collection of nine squares. */
 func squareUnits(s: Int) -> [[Int]] {
+    
     /* same row */
     var row = s / columns
     var rowUnits = [Int](count: columns, repeatedValue: 0)
@@ -40,7 +41,6 @@ func squareUnits(s: Int) -> [[Int]] {
             boxUnits[i] = (row + r) * columns + (column + c)
         }
     }
-    
     return [rowUnits, columnUnits, boxUnits]
 }
 
@@ -71,14 +71,12 @@ func squarePeers(s: Int) -> NSMutableSet {
             if i != s { peers.addObject(i) }
         }
     }
-    
     return peers
 }
 
 /* Parse a file into a list of strings, separated by separator. */
 func fromFile(fileName: String, separator: String = "\n") -> [String] {
     var res = [String]()
-    
     if let data = NSData(contentsOfFile: fileName) {
         if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
             let res = str.componentsSeparatedByString(separator) as [String]
@@ -88,9 +86,9 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
     return res
 }
 
-/* Solve grid */
+/* Solve one grid */
 func solve(grid: String) -> Grid {
-    var g = Grid(grid: grid)
+    var g = Grid(grid)
     g.search()
     return g
 }
@@ -100,10 +98,8 @@ When showif is a number of seconds, display puzzles that take longer.
 When showif is None, don't display any puzzles.
 */
 func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
-    var maxTime = UInt64.min
-    var sumTime = UInt64(0)
+    var maxTime = UInt64.min, sumTime = UInt64(0)
     var n = 0, solved = 0
-
     for grid in grids {
         let startTime = mach_absolute_time()
         var g = solve(grid)
@@ -111,7 +107,7 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
         if solve(grid).solved { ++solved }
         
         if showIf { println(solve(grid)) }
-
+        
         let elapsedTime = mach_absolute_time() - startTime
         maxTime = max(maxTime, elapsedTime)
         sumTime += elapsedTime
