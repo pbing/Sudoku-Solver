@@ -43,3 +43,10 @@ Python program.
 | average   |  0.01  | 0.26          | 0.0046          |
 | maximum   |  0.01  | 0.34          | 0.0058          |
 | frequency |  151   | 3.87          | 217             |
+
+
+### Averaged Frequencies
+
+|           | Python | Swift (Debug) | Swift (Release) |
+|-----------|--------|---------------|-----------------|
+| frequency |  102   | 2.62          | 160             |
