@@ -13,120 +13,33 @@ grid will be measured. Also, the number of solutions per second is
 calculated from the average time, this shows a better resolution for
 very short solving times.
 
-The release version of the Swift program is about 10 times faster than
-the debugging version. The original Python program runs about 14 times
-faster then the release version of the Swift program.
+The release version of the Swift program is about 60 times faster than
+the debugging version and performs 1.5 times faster than the original
+Python program.
 
 
 ### Easy Puzzles (easy50.txt)
 
-
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.73          | 0.06            |
-| maximum   |  0.01  | 0.86          | 0.075           |
-| frequency |  199   | 1.37          | 15.5            |
+| average   |  0.01  | 0.20          | 0.0034          |
+| maximum   |  0.01  | 0.24          | 0.0041          |
+| frequency |  199   | 4.98          | 290             |
 
 
 ### Hard Puzzles (top95.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.02  | 2.4           | 0.24            |
-| maximum   |  0.09  | 11            | 1.2             |
-| frequency |  56    | 0.41          | 4.1             |
+| average   |  0.02  | 0.68          | 0.011           |
+| maximum   |  0.09  | 3.2           | 0.048           |
+| frequency |  56    | 1.46          | 93.1            |
 
 
-### Hardes Puzzles (hardest.txt)
+### Hardest Puzzles (hardest.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.94          | 0.08            |
-| maximum   |  0.01  | 1.2           | 0.14            |
-| frequency |  151   | 1.1           | 11              |
-
-
-## Profiling
-
-The profiler shows, that 69.3 % of the time is spent in search() and
-therefore in the double recursive functions eliminate() and assign().
-
-The function eliminate() uses units() and peers() wherein most time is
-spent in the Array.append() methods.
-
-The 30.6 % of __allocating_init() came from the fact that init() uses
-also assign() when the squares are placed and constrained for the
-first time.
-
-
-### top_level_code():
-
-| Running Time | Symbol Name       |
-|--------------|-------------------|
-| 99.9 %       | solveAll()        |
-
-
-### solveAll()
-
-| Running Time | Symbol Name         |
-|--------------|---------------------|
-| 69.3 %       | search()            |
-| 30.6 %       | __allocating_init() |
-
-
-#### search()
-
-| Running Time | Symbol Name       |
-|--------------|-------------------|
-| 69.1 %       | assign()          |
-
-
-#### assign()
-
-| Running Time | Symbol Name       |
-|--------------|-------------------|
-| 68.9 %       | eliminate()       |
-
-#### eliminate()
-
-| Running Time | Symbol Name                                          |
-|--------------|------------------------------------------------------|
-| 49.9 %       | assign()                                             |
-|  6.9 %       | units()                                              |
-|  5.3 %       | Swift._ContiguousArrayStorage.__dealocating_deinit() |
-|  4.3 %       | peers()                                              |
-|  1.6 %       | \<Swift Int\>: Swift.Array.append()                  |
-
-
-## Benchmarks (performance branch)
-
-* Replaced Array.append in unit() and peers() ( -50.2 %, 2.0 times faster)
-* Used precalculated global arrays (units[], peers[]) ( -95.3 %, 21 times faster)
-
-
-### Easy Puzzles (easy50.txt)
-
-
-|           | Python | Swift (Release) |
-|-----------|--------|-----------------|
-| average   |  0.01  | 0.0034          |
-| maximum   |  0.01  | 0.0043          |
-| frequency |  199   | 293             |
-
-
-### Hard Puzzles (top95.txt)
-
-|           | Python | Swift (Release) |
-|-----------|--------|-----------------|
-| average   |  0.02  | 0.011           |
-| maximum   |  0.09  | 0.048           |
-| frequency |  56    | 93              |
-
-
-### Hardes Puzzles (hardest.txt)
-
-|           | Python | Swift (Release) |
-|-----------|--------|-----------------|
-| average   |  0.01  | 0.0048          |
-| maximum   |  0.01  | 0.0062          |
-| frequency |  151   | 209             |
+| average   |  0.01  | 0.26          | 0.0046          |
+| maximum   |  0.01  | 0.34          | 0.0058          |
+| frequency |  151   | 3.87          | 217             |
