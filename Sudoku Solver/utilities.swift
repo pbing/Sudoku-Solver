@@ -9,6 +9,70 @@
 import Foundation
 import CoreServices
 
+/* A unit are the columns 1-9, the rows A-I and
+a collection of nine squares. */
+func squareUnits(s: Int) -> [[Int]] {
+    /* same row */
+    var row = s / columns
+    var rowUnits = [Int](count: columns, repeatedValue: 0)
+    var i = 0
+    for column in 0..<columns {
+        rowUnits[i++] = row * columns + column
+    }
+    
+    /* same column */
+    var column = s % rows
+    var columnUnits = [Int](count: rows, repeatedValue: 0)
+    i = 0
+    for row in 0..<rows {
+        columnUnits[i++] = row * columns + column
+    }
+    
+    /* 3x3 box */
+    row = 3 * (s / (3 * columns))
+    column = 3 * ((s % rows) / 3)
+    var boxUnits = [Int](count: 3 * 3, repeatedValue: 0)
+    for r in 0..<3 {
+        for c in 0..<3 {
+            let i = r * 3 + c
+            boxUnits[i] = (row + r) * columns + (column + c)
+        }
+    }
+    
+    return [rowUnits, columnUnits, boxUnits]
+}
+
+/* The peers are the squares that share a unit. */
+func squarePeers(s: Int) -> NSMutableSet {
+    var peers = NSMutableSet(capacity: 20)
+    
+    /* same row */
+    var row = s / columns
+    for column in 0..<columns {
+        let i = row * columns + column
+        if i != s { peers.addObject(i) }
+    }
+    
+    /* same column */
+    var column = s % rows
+    for row in 0..<rows {
+        let i = row * columns + column
+        if i != s { peers.addObject(i) }
+    }
+    
+    /* 3x3 box */
+    row = 3 * (s / (3 * columns))
+    column = 3 * ((s % rows) / 3)
+    for r in 0..<3 {
+        for c in 0..<3 {
+            let i = (row + r) * columns + (column + c)
+            if i != s { peers.addObject(i) }
+        }
+    }
+    
+    return peers
+}
+
 /* Parse a file into a list of strings, separated by separator. */
 func fromFile(fileName: String, separator: String = "\n") -> [String] {
     var res = [String]()

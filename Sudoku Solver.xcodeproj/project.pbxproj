@@ -44,6 +44,7 @@
 		7336A74E19F9297800F2F2AB /* hardest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hardest.txt; sourceTree = "<group>"; };
 		7336A74F19F9297800F2F2AB /* top95.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = top95.txt; sourceTree = "<group>"; };
 		7336A75519F942B700F2F2AB /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		7379972119FCFF5A007975F0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		73C4E7CA19FA8CDE00E0483F /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		73C55DF319F9BD7900F57C92 /* sudoku.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = sudoku.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +70,7 @@
 		7336A70D19F913D600F2F2AB = {
 			isa = PBXGroup;
 			children = (
+				7379972119FCFF5A007975F0 /* README.md */,
 				7336A71819F913D600F2F2AB /* Sudoku Solver */,
 				7336A74419F9268F00F2F2AB /* TestSudokuSolver */,
 				7336A71719F913D600F2F2AB /* Products */,

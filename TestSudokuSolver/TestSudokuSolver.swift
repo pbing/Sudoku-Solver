@@ -14,6 +14,12 @@ class TestSudokuSolver: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        /* Precalculate units[] and peers[] */
+        for s in 0..<(rows * columns) {
+            units.append(squareUnits(s))
+            peers.append(squarePeers(s).allObjects as [Int])
+        }
     }
     
     override func tearDown() {
@@ -108,37 +114,37 @@ class TestSudokuSolver: XCTestCase {
         }
     }
     
-    func testGridUnits() {
+    func testUnits() {
         let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
         let grid = Grid(grid: grid1)
         
         /* Square 'C2' */
-        XCTAssertEqual(grid.units(2*9 + 1).count, 3)
-        XCTAssertEqual(grid.units(2*9 + 1),
+        XCTAssertEqual(units[2*9 + 1].count, 3)
+        XCTAssertEqual(units[2*9 + 1],
             [[18, 19, 20, 21, 22, 23, 24, 25, 26],
                 [1, 10, 19, 28, 37, 46, 55, 64, 73],
                 [0, 1, 2, 9, 10, 11, 18, 19, 20]])
         
         /* Square 'E5' */
-        XCTAssertEqual(grid.units(4*9 + 4).count, 3)
-        XCTAssertEqual(grid.units(4*9 + 4),
+        XCTAssertEqual(units[4*9 + 4].count, 3)
+        XCTAssertEqual(units[4*9 + 4],
             [[36, 37, 38, 39, 40, 41, 42, 43, 44],
                 [4, 13, 22, 31, 40, 49, 58, 67, 76],
                 [30, 31, 32, 39, 40, 41, 48, 49, 50]])
     }
     
-    func testGridPeers() {
+    func testPeers() {
         let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
         let grid = Grid(grid: grid1)
         
         /* Square 'C2' */
-        XCTAssertEqual(grid.peers(2*9 + 1).count, 20)
-        XCTAssertEqual(grid.peers(2*9 + 1).sorted { $0 < $1 },
+        XCTAssertEqual(peers[2*9 + 1].count, 20)
+        XCTAssertEqual(peers[2*9 + 1].sorted { $0 < $1 },
             [0, 1, 2, 9, 10, 11, 18, 20, 21, 22, 23, 24, 25, 26, 28, 37, 46, 55, 64, 73])
         
         /* Square 'E5' */
-        XCTAssertEqual(grid.peers(4*9 + 4).count, 20)
-        XCTAssertEqual(grid.peers(4*9 + 4).sorted { $0 < $1 },
+        XCTAssertEqual(peers[4*9 + 4].count, 20)
+        XCTAssertEqual(peers[4*9 + 4].sorted { $0 < $1 },
             [4, 13, 22, 30, 31, 32, 36, 37, 38, 39, 41, 42, 43, 44, 48, 49, 50, 58, 67, 76])
     }
     
