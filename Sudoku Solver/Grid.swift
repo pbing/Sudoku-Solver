@@ -8,8 +8,12 @@
 
 import Foundation
 
+/* Constants */
+let rows = 9, columns = 9
+var units = [[[Int]]]()
+var peers = [[Int]]()
+
 class Grid: Printable {
-    let rows = 9, columns = 9
     var values = [Square]()
     
     /* Return description for protocol Printable. */
@@ -69,7 +73,7 @@ class Grid: Printable {
     
     init(grid: String) {
         /* To start, every square can be any digit */
-        for i in 0..<(rows * columns) {
+        for s in 0..<(rows * columns) {
             values.append(Square(0x1ff))
         }
         
@@ -82,75 +86,6 @@ class Grid: Printable {
                 }
             }
         }
-    }
-    
-    /* A unit are the columns 1-9, the rows A-I and
-    a collection of nine squares. */
-    func units(s: Int) -> [[Int]] {
-        /* same row */
-        var row = s / columns
-        var rowUnits = [Int](count: columns, repeatedValue: 0)
-        var i = 0
-        for column in 0..<columns {
-            rowUnits[i++] = row * columns + column
-        }
-        
-        /* same column */
-        var column = s % rows
-        var columnUnits = [Int](count: rows, repeatedValue: 0)
-        i = 0
-        for row in 0..<rows {
-            columnUnits[i++] = row * columns + column
-        }
-        
-        /* 3x3 box */
-        row = 3 * (s / (3 * columns))
-        column = 3 * ((s % rows) / 3)
-        var boxUnits = [Int](count: 3 * 3, repeatedValue: 0)
-        for r in 0..<3 {
-            for c in 0..<3 {
-                let i = r * 3 + c
-                boxUnits[i] = (row + r) * columns + (column + c)
-            }
-        }
-        
-        return [rowUnits, columnUnits, boxUnits]
-    }
-    
-    /* The peers are the squares that share a unit. */
-    func peers(s: Int) -> [Int] {
-        var peers = NSMutableSet(capacity: 20)
-        
-        /* same row */
-        var row = s / columns
-        for column in 0..<columns {
-            let i = row * columns + column
-            if i != s { peers.addObject(i) }
-        }
-        
-        /* same column */
-        var column = s % rows
-        for row in 0..<rows {
-            let i = row * columns + column
-            if i != s { peers.addObject(i) }
-        }
-        
-        /* 3x3 box */
-        row = 3 * (s / (3 * columns))
-        column = 3 * ((s % rows) / 3)
-        for r in 0..<3 {
-            for c in 0..<3 {
-                let i = (row + r) * columns + (column + c)
-                if i != s { peers.addObject(i) }
-            }
-        }
-        
-        var res = [Int](count: 20, repeatedValue: 0)
-        var j = 0
-        for i in peers.allObjects {
-            res[j++] = i as Int
-        }
-        return res
     }
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
@@ -178,28 +113,34 @@ class Grid: Printable {
         if count == 0 { return nil } // Contradiction: removed last value
         else if count == 1 {
             let d2 = values[s].digits[0]
-            for s2 in peers(s) {
+            for s2 in peers[s] {
                 if eliminate(s2, d: d2) == nil { return nil }
             }
         }
         
         /* (2) If a unit u is reduced to only one place for a value d, then put it there. */
-        for u in units(s) {
-            var dPlaces = [Int]()
+        for u in units[s] {
+            var dPlaces = 0, dPlacesCount = 0
             for s in u {
-                if values[s].hasDigit(d) { dPlaces.append(s) }
+                if values[s].hasDigit(d) {
+                    dPlaces = s
+                    ++dPlacesCount
+                }
             }
             
-            let count = dPlaces.count
-            if count == 0 { return nil } // Contradiction: no place for this value
-            else if count == 1 {
+            if dPlacesCount == 0 {
+                return nil // Contradiction: no place for this value
+            }
+            else if dPlacesCount == 1 {
                 /* d can only be in one place in unit; assign it there */
-                if assign(dPlaces[0], d: d) == nil { return nil }
+                if assign(dPlaces, d: d) == nil { return nil }
             }
         }
+        
         return values
     }
     
+    /* Check if puzzle is solved. */
     var solved: Bool {
         for s in values {
             if s.count != 1 { return false }
@@ -224,7 +165,9 @@ class Grid: Printable {
         
         for d in values[s].digits {
             let values = self.values
-            if var values2 = assign(s, d: d) { search(values2) }
+            if var values2 = assign(s, d: d) {
+                search(values2)
+            }
             if !solved {  self.values = values }
         }
         return nil

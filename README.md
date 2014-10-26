@@ -100,7 +100,8 @@ first time.
 
 ## Benchmarks (performance branch)
 
-* replaced Array.append in unit() and peers() ( -50.2 %)
+* Replaced Array.append in unit() and peers() ( -50.2 %, 2.0 times faster)
+* Used precalculated global arrays (units[], peers[]) ( -95.3 %, 21 times faster)
 
 
 ### Easy Puzzles (easy50.txt)
@@ -108,24 +109,24 @@ first time.
 
 |           | Python | Swift (Release) |
 |-----------|--------|-----------------|
-| average   |  0.01  | 0.036           |
-| maximum   |  0.01  | 0.043           |
-| frequency |  199   | 27              |
+| average   |  0.01  | 0.0034          |
+| maximum   |  0.01  | 0.0043          |
+| frequency |  199   | 293             |
 
 
 ### Hard Puzzles (top95.txt)
 
 |           | Python | Swift (Release) |
 |-----------|--------|-----------------|
-| average   |  0.02  | 0.12            |
-| maximum   |  0.09  | 0.53            |
-| frequency |  56    | 8.6             |
+| average   |  0.02  | 0.011           |
+| maximum   |  0.09  | 0.048           |
+| frequency |  56    | 93              |
 
 
 ### Hardes Puzzles (hardest.txt)
 
 |           | Python | Swift (Release) |
 |-----------|--------|-----------------|
-| average   |  0.01  | 0.046           |
-| maximum   |  0.01  | 0.059           |
-| frequency |  151   | 22              |
+| average   |  0.01  | 0.0048          |
+| maximum   |  0.01  | 0.0062          |
+| frequency |  151   | 209             |

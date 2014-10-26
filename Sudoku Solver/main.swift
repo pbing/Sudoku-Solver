@@ -10,6 +10,13 @@
 
 import Foundation
 
+/* Precalculate units[] and peers[] */
+for s in 0..<(rows * columns) {
+    units.append(squareUnits(s))
+    peers.append(squarePeers(s).allObjects as [Int])
+}
+
+
 /* added for profiling */
 let fileManager = NSFileManager()
 fileManager.changeCurrentDirectoryPath("/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Solver")
