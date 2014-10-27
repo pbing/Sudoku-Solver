@@ -14,7 +14,7 @@ calculated from the average time, this shows a better resolution for
 very short solving times.
 
 The release version of the Swift program is about 60 times faster than
-the debugging version and performs 1.5 times faster than the original
+the debugging version and performs three times faster than the original
 Python program.
 
 
@@ -22,31 +22,31 @@ Python program.
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.20          | 0.0034          |
-| maximum   |  0.01  | 0.24          | 0.0041          |
-| frequency |  199   | 4.98          | 290             |
+| average   |  0.01  | 0.099         | 0.0017          |
+| maximum   |  0.01  | 0.12          | 0.0022          |
+| frequency |  199   | 10.1          | 595             |
 
 
 ### Hard Puzzles (top95.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.02  | 0.68          | 0.011           |
-| maximum   |  0.09  | 3.2           | 0.048           |
-| frequency |  56    | 1.46          | 93.1            |
+| average   |  0.02  | 0.34          | 0.0053          |
+| maximum   |  0.09  | 1.6           | 0.024           |
+| frequency |  56    | 2.95          | 189             |
 
 
 ### Hardest Puzzles (hardest.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.26          | 0.0046          |
-| maximum   |  0.01  | 0.34          | 0.0058          |
-| frequency |  151   | 3.87          | 217             |
+| average   |  0.01  | 0.13          | 0.0022          |
+| maximum   |  0.01  | 0.17          | 0.0030          |
+| frequency |  151   | 7.82          | 445             |
 
 
 ### Averaged Frequencies
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| frequency |  102   | 2.62          | 160             |
+| frequency |  102   | 5.30          | 325             |
