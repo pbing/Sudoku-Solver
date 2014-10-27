@@ -97,7 +97,7 @@ func solve(grid: String) -> Grid {
 When showif is false, don't display any puzzles.
 */
 func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
-    var maxTime = UInt64.min, sumTime = UInt64(0)
+    var maxTime = UInt64(0), sumTime = UInt64(0)
     var n = 0, solved = 0
     for grid in grids {
         let startTime = mach_absolute_time()
