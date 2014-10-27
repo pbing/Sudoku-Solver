@@ -94,8 +94,7 @@ func solve(grid: String) -> Grid {
 }
 
 /* Attempt to solve a sequence of grids. Report results.
-When showif is a number of seconds, display puzzles that take longer.
-When showif is None, don't display any puzzles.
+When showif is false, don't display any puzzles.
 */
 func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
     var maxTime = UInt64.min, sumTime = UInt64(0)
@@ -104,9 +103,9 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
         let startTime = mach_absolute_time()
         var g = solve(grid)
         
-        if solve(grid).solved { ++solved }
+        if g.solved { ++solved }
         
-        if showIf { println(solve(grid)) }
+        if showIf { println(g) }
         
         let elapsedTime = mach_absolute_time() - startTime
         maxTime = max(maxTime, elapsedTime)
