@@ -102,15 +102,17 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
     for grid in grids {
         let startTime = mach_absolute_time()
         var g = solve(grid)
-        
-        if g.solved { ++solved }
-        
-        if showIf { println(g) }
-        
         let elapsedTime = mach_absolute_time() - startTime
+
         maxTime = max(maxTime, elapsedTime)
         sumTime += elapsedTime
         ++n
+        if g.solved { ++solved }
+        
+        if showIf {
+            println(grid)
+            println(g)
+        }
     }
     
     let realMaxTime = Double(maxTime) * 1.0e-9
