@@ -24,7 +24,7 @@ Python program.
 |-----------|--------|---------------|-----------------|
 | average   |  0.01  | 0.011         | 0.00073         |
 | maximum   |  0.01  | 0.014         | 0.00086         |
-| frequency |  199   | 93.7          | 1367            |
+| frequency |  216   | 93.7          | 1367            |
 
 
 ### Hard Puzzles (top95.txt)
@@ -32,8 +32,8 @@ Python program.
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
 | average   |  0.02  | 0.036         | 0.0023          |
-| maximum   |  0.09  | 0.17          | 0.011           |
-| frequency |  56    | 27.7          | 437             |
+| maximum   |  0.08  | 0.17          | 0.011           |
+| frequency |  61    | 27.7          | 437             |
 
 
 ### Hardest Puzzles (hardest.txt)
@@ -42,11 +42,11 @@ Python program.
 |-----------|--------|---------------|-----------------|
 | average   |  0.01  | 0.014         | 0.00092         |
 | maximum   |  0.01  | 0.018         | 0.0012          |
-| frequency |  151   | 73.1          | 1088            |
+| frequency |  167   | 73.1          | 1088            |
 
 
 ### Averaged Frequencies
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| frequency |  102   | 49.6          | 762             |
+| frequency |  111   | 49.6          | 762             |
