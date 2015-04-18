@@ -18,7 +18,7 @@ class TestSudokuSolver: XCTestCase {
         /* Precalculate units[] and peers[] */
         for s in 0..<(rows * columns) {
             units.append(squareUnits(s))
-            peers.append(squarePeers(s).allObjects as [Int])
+            peers.append(squarePeers(s).allObjects as! [Int])
         }
     }
     

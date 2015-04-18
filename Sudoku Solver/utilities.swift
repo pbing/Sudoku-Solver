@@ -79,7 +79,7 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
     var res = [String]()
     if let data = NSData(contentsOfFile: fileName) {
         if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
-            let res = str.componentsSeparatedByString(separator) as [String]
+            let res = str.componentsSeparatedByString(separator) as! [String]
             return res.filter { !$0.isEmpty }
         }
     }
