@@ -46,7 +46,7 @@ func squareUnits(s: Int) -> [[Int]] {
 
 /* The peers are the squares that share a unit. */
 func squarePeers(s: Int) -> NSMutableSet {
-    var peers = NSMutableSet(capacity: 20)
+    let peers = NSMutableSet(capacity: 20)
     
     /* same row */
     var row = s / columns
@@ -76,10 +76,10 @@ func squarePeers(s: Int) -> NSMutableSet {
 
 /* Parse a file into a list of strings, separated by separator. */
 func fromFile(fileName: String, separator: String = "\n") -> [String] {
-    var res = [String]()
+    let res = [String]()
     if let data = NSData(contentsOfFile: fileName) {
         if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
-            let res = str.componentsSeparatedByString(separator) as! [String]
+            let res = str.componentsSeparatedByString(separator) 
             return res.filter { !$0.isEmpty }
         }
     }
@@ -88,7 +88,7 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
 
 /* Solve one grid */
 func solve(grid: String) -> Grid {
-    var g = Grid(grid)
+    let g = Grid(grid)
     g.search()
     return g
 }
@@ -101,7 +101,7 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
     var n = 0, solved = 0
     for grid in grids {
         let startTime = mach_absolute_time()
-        var g = solve(grid)
+        let g = solve(grid)
         let elapsedTime = mach_absolute_time() - startTime
 
         maxTime = max(maxTime, elapsedTime)
@@ -110,12 +110,12 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
         if g.solved { ++solved }
         
         if showIf {
-            println(grid)
-            println(g)
+            print(grid)
+            print(g)
         }
     }
     
     let realMaxTime = Double(maxTime) * 1.0e-9
     let realTime = Double(sumTime) * 1.0e-9 / Double(n)
-    println("Solved \(solved) of \(n) \(name) puzzles (avg \(realTime) secs (\(1.0/realTime) Hz), max \(realMaxTime) secs).")
+    print("Solved \(solved) of \(n) \(name) puzzles (avg \(realTime) secs (\(1.0/realTime) Hz), max \(realMaxTime) secs).")
 }

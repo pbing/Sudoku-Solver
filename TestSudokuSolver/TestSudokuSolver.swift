@@ -115,8 +115,6 @@ class TestSudokuSolver: XCTestCase {
     }
     
     func testUnits() {
-        let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
-        let grid = Grid(grid1)
         
         /* Square 'C2' */
         XCTAssertEqual(units[2*9 + 1].count, 3)
@@ -134,17 +132,15 @@ class TestSudokuSolver: XCTestCase {
     }
     
     func testPeers() {
-        let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
-        let grid = Grid(grid1)
         
         /* Square 'C2' */
         XCTAssertEqual(peers[2*9 + 1].count, 20)
-        XCTAssertEqual(peers[2*9 + 1].sorted { $0 < $1 },
+        XCTAssertEqual(peers[2*9 + 1].sort { $0 < $1 },
             [0, 1, 2, 9, 10, 11, 18, 20, 21, 22, 23, 24, 25, 26, 28, 37, 46, 55, 64, 73])
         
         /* Square 'E5' */
         XCTAssertEqual(peers[4*9 + 4].count, 20)
-        XCTAssertEqual(peers[4*9 + 4].sorted { $0 < $1 },
+        XCTAssertEqual(peers[4*9 + 4].sort { $0 < $1 },
             [4, 13, 22, 30, 31, 32, 36, 37, 38, 39, 41, 42, 43, 44, 48, 49, 50, 58, 67, 76])
     }
     

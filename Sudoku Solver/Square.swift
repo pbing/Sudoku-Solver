@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Square: Printable {
+struct Square: CustomStringConvertible {
     var value = UInt16(0)
     
     init(_ value: UInt16 = 0) {

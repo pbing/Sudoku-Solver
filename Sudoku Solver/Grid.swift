@@ -13,14 +13,14 @@ let rows = 9, columns = 9
 var units = [[[Int]]]()
 var peers = [[Int]]()
 
-class Grid: Printable {
+class Grid: CustomStringConvertible {
     /* To start, every square can be any digit */
     var values = [Square](count: rows * columns, repeatedValue: Square(0x1ff))
     
     /* Return description for protocol Printable. */
     var description: String {
         /* Convert to NSString in order to determine the string length. */
-        let values = map(self.values) { NSString(string: "\($0)") }
+        let values = self.values.map { NSString(string: "\($0)") }
         
         /* max. string length of every value */
         var maxLen = 0
@@ -30,10 +30,10 @@ class Grid: Printable {
         
         /* Build line */
         var lineSegment = String()
-        for i in 0..<3*maxLen + 2 {
+        for _ in 0..<3*maxLen + 2 {
             lineSegment += "-"
         }
-        let line = "+".join([lineSegment,lineSegment,lineSegment])
+        let line = [lineSegment,lineSegment,lineSegment].joinWithSeparator("+")
         
         /* Build table grid */
         var row = [String]()
@@ -44,27 +44,27 @@ class Grid: Printable {
                 col.append(values[r * columns + i].stringByPaddingToLength(maxLen, withString: " ", startingAtIndex: 0))
             }
             
-            let c0 = " ".join(col[0...2])
-            let c1 = " ".join(col[3...5])
-            let c2 = " ".join(col[6...8])
-            row.append("|".join([c0,c1,c2]))
+            let c0 = col[0...2].joinWithSeparator(" ")
+            let c1 = col[3...5].joinWithSeparator(" ")
+            let c2 = col[6...8].joinWithSeparator(" ")
+            row.append([c0,c1,c2].joinWithSeparator("|"))
         }
         
-        let r0 = "\n".join(row[0...2])
-        let r1 = "\n".join(row[3...5])
-        let r2 = "\n".join(row[6...8])
-        return "\n\(line)\n".join([r0,r1,r2]) + "\n"
+        let r0 = row[0...2].joinWithSeparator("\n")
+        let r1 = row[3...5].joinWithSeparator("\n")
+        let r2 = row[6...8].joinWithSeparator("\n")
+        return [r0,r1,r2].joinWithSeparator("\n\(line)\n") + "\n"
     }
     
     /* Convert grid into an array of Int with '0' or '.' for empties. */
     func gridValues(grid: String) -> [Int] {
         var res = [Int]()
-        for c in grid {
+        for c in grid.characters {
             switch c {
             case "0",".":
                 res.append(0)
             default:
-                if let d = String(c).toInt() {
+                if let d = Int(String(c)) {
                     res.append(d)
                 }
             }

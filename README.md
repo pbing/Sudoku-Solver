@@ -22,31 +22,31 @@ Python program.
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.011         | 0.00073         |
-| maximum   |  0.01  | 0.014         | 0.00086         |
-| frequency |  216   | 93.7          | 1367            |
+| average   |  0.01  | 0.011         | 0.00094         |
+| maximum   |  0.01  | 0.011         | 0.00100         |
+| frequency |  216   | 113           | 1348            |
 
 
 ### Hard Puzzles (top95.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.02  | 0.036         | 0.0023          |
-| maximum   |  0.08  | 0.17          | 0.011           |
-| frequency |  61    | 27.7          | 437             |
+| average   |  0.02  | 0.136         | 0.0103          |
+| maximum   |  0.08  | 0.137         | 0.0105          |
+| frequency |  61    | 34.1          | 455             |
 
 
 ### Hardest Puzzles (hardest.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.014         | 0.00092         |
-| maximum   |  0.01  | 0.018         | 0.0012          |
-| frequency |  167   | 73.1          | 1088            |
+| average   |  0.01  | 0.0151        | 0.00115         |
+| maximum   |  0.01  | 0.0154        | 0.00117         |
+| frequency |  167   | 88.7          | 1124            |
 
 
 ### Averaged Frequencies
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| frequency |  111   | 49.6          | 762             |
+| frequency |  111   | 60.7          | 783             |
