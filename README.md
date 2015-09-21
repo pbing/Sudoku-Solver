@@ -13,7 +13,7 @@ grid will be measured. Also, the number of solutions per second is
 calculated from the average time, this shows a better resolution for
 very short solving times.
 
-The release version of the Swift program is about 15 times faster than
+The release version of the Swift program is about 13 times faster than
 the debugging version and performs seven times faster than the original
 Python program.
 
