@@ -13,40 +13,39 @@ grid will be measured. Also, the number of solutions per second is
 calculated from the average time, this shows a better resolution for
 very short solving times.
 
-The release version of the Swift program is about 13 times faster than
-the debugging version and performs seven times faster than the original
-Python program.
+The release version of the Swift program is about seven times faster than
+the debugging version and the original Python program.
 
 
 ### Easy Puzzles (easy50.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.011         | 0.00094         |
-| maximum   |  0.01  | 0.011         | 0.00100         |
-| frequency |  216   | 113           | 1348            |
+| average   |  0.01  | 0.0042        | 0.00066         |
+| maximum   |  0.01  | 0.0060        | 0.00086         |
+| frequency |  216   | 236           | 1517            |
 
 
 ### Hard Puzzles (top95.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.02  | 0.136         | 0.0103          |
-| maximum   |  0.08  | 0.137         | 0.0105          |
-| frequency |  61    | 34.1          | 455             |
+| average   |  0.02  | 0.015         | 0.0022          |
+| maximum   |  0.08  | 0.068         | 0.0115          |
+| frequency |  61    | 68.6          | 460             |
 
 
 ### Hardest Puzzles (hardest.txt)
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| average   |  0.01  | 0.0151        | 0.00115         |
-| maximum   |  0.01  | 0.0154        | 0.00117         |
-| frequency |  167   | 88.7          | 1124            |
+| average   |  0.01  | 0.0057        | 0.00082         |
+| maximum   |  0.01  | 0.0079        | 0.00109         |
+| frequency |  167   | 175           | 1227            |
 
 
 ### Averaged Frequencies
 
 |           | Python | Swift (Debug) | Swift (Release) |
 |-----------|--------|---------------|-----------------|
-| frequency |  111   | 60.7          | 783             |
+| frequency |  111   | 122           | 822             |

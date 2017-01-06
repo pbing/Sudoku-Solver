@@ -13,28 +13,30 @@ let currentDirectoryPath = "/Users/bernd/Projects/Swift/Sudoku Solver/Sudoku Sol
 
 /* A unit are the columns 1-9, the rows A-I and
 a collection of nine squares. */
-func squareUnits(s: Int) -> [[Int]] {
+func squareUnits(_ s: Int) -> [[Int]] {
     
     /* same row */
     var row = s / columns
-    var rowUnits = [Int](count: columns, repeatedValue: 0)
+    var rowUnits = [Int](repeating: 0, count: columns)
     var i = 0
     for column in 0..<columns {
-        rowUnits[i++] = row * columns + column
+        rowUnits[i] = row * columns + column
+        i += 1
     }
     
     /* same column */
     var column = s % rows
-    var columnUnits = [Int](count: rows, repeatedValue: 0)
+    var columnUnits = [Int](repeating: 0, count: rows)
     i = 0
     for row in 0..<rows {
-        columnUnits[i++] = row * columns + column
+        columnUnits[i] = row * columns + column
+        i += 1
     }
     
     /* 3x3 box */
     row = 3 * (s / (3 * columns))
     column = 3 * ((s % rows) / 3)
-    var boxUnits = [Int](count: 3 * 3, repeatedValue: 0)
+    var boxUnits = [Int](repeating: 0, count: 3 * 3)
     for r in 0..<3 {
         for c in 0..<3 {
             let i = r * 3 + c
@@ -45,21 +47,21 @@ func squareUnits(s: Int) -> [[Int]] {
 }
 
 /* The peers are the squares that share a unit. */
-func squarePeers(s: Int) -> NSMutableSet {
+func squarePeers(_ s: Int) -> NSMutableSet {
     let peers = NSMutableSet(capacity: 20)
     
     /* same row */
     var row = s / columns
     for column in 0..<columns {
         let i = row * columns + column
-        if i != s { peers.addObject(i) }
+        if i != s { peers.add(i) }
     }
     
     /* same column */
     var column = s % rows
     for row in 0..<rows {
         let i = row * columns + column
-        if i != s { peers.addObject(i) }
+        if i != s { peers.add(i) }
     }
     
     /* 3x3 box */
@@ -68,18 +70,18 @@ func squarePeers(s: Int) -> NSMutableSet {
     for r in 0..<3 {
         for c in 0..<3 {
             let i = (row + r) * columns + (column + c)
-            if i != s { peers.addObject(i) }
+            if i != s { peers.add(i) }
         }
     }
     return peers
 }
 
 /* Parse a file into a list of strings, separated by separator. */
-func fromFile(fileName: String, separator: String = "\n") -> [String] {
+func fromFile(_ fileName: String, separator: String = "\n") -> [String] {
     let res = [String]()
-    if let data = NSData(contentsOfFile: fileName) {
-        if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
-            let res = str.componentsSeparatedByString(separator) 
+    if let data = try? Data(contentsOf: URL(fileURLWithPath: fileName)) {
+        if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+            let res = str.components(separatedBy: separator) 
             return res.filter { !$0.isEmpty }
         }
     }
@@ -87,16 +89,16 @@ func fromFile(fileName: String, separator: String = "\n") -> [String] {
 }
 
 /* Solve one grid */
-func solve(grid: String) -> Grid {
+func solve(_ grid: String) -> Grid {
     let g = Grid(grid)
-    g.search()
+    _ = g.search()
     return g
 }
 
 /* Attempt to solve a sequence of grids. Report results.
 When showif is false, don't display any puzzles.
 */
-func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
+func solveAll(_ grids: [String], name: String = "", showIf: Bool = false) {
     var maxTime = UInt64(0), sumTime = UInt64(0)
     var n = 0, solved = 0
     for grid in grids {
@@ -106,8 +108,8 @@ func solveAll(grids: [String], name: String = "", showIf: Bool = false) {
 
         maxTime = max(maxTime, elapsedTime)
         sumTime += elapsedTime
-        ++n
-        if g.solved { ++solved }
+        n += 1
+        if g.solved { solved += 1 }
         
         if showIf {
             print(grid)

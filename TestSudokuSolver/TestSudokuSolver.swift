@@ -28,11 +28,11 @@ class TestSudokuSolver: XCTestCase {
     }
     
     func testPerformanceSolve() {
-        self.measureBlock() {
+        self.measure() {
             let grid1 = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
             let grid2 = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......"
-            solve(grid1)
-            solve(grid2)
+            _ = solve(grid1)
+            _ = solve(grid2)
         }
     }
     
@@ -118,29 +118,31 @@ class TestSudokuSolver: XCTestCase {
         
         /* Square 'C2' */
         XCTAssertEqual(units[2*9 + 1].count, 3)
-        XCTAssertEqual(units[2*9 + 1],
-            [[18, 19, 20, 21, 22, 23, 24, 25, 26],
-                [1, 10, 19, 28, 37, 46, 55, 64, 73],
-                [0, 1, 2, 9, 10, 11, 18, 19, 20]])
-        
+        let result_C2 = units[2*9 + 1].flatMap { $0 } // XCTAssertEqual does not compare nested arrays anymore
+        XCTAssertEqual(result_C2,
+            [18, 19, 20, 21, 22, 23, 24, 25, 26,
+              1, 10, 19, 28, 37, 46, 55, 64, 73,
+              0,  1,  2,  9, 10, 11, 18, 19, 20])
+
         /* Square 'E5' */
         XCTAssertEqual(units[4*9 + 4].count, 3)
-        XCTAssertEqual(units[4*9 + 4],
-            [[36, 37, 38, 39, 40, 41, 42, 43, 44],
-                [4, 13, 22, 31, 40, 49, 58, 67, 76],
-                [30, 31, 32, 39, 40, 41, 48, 49, 50]])
+        let result_E5 = units[4*9 + 4].flatMap { $0 } // XCTAssertEqual does not compare nested arrays anymore
+        XCTAssertEqual(result_E5,
+            [36, 37, 38, 39, 40, 41, 42, 43, 44,
+              4, 13, 22, 31, 40, 49, 58, 67, 76,
+             30, 31, 32, 39, 40, 41, 48, 49, 50])
     }
     
     func testPeers() {
         
         /* Square 'C2' */
         XCTAssertEqual(peers[2*9 + 1].count, 20)
-        XCTAssertEqual(peers[2*9 + 1].sort { $0 < $1 },
+        XCTAssertEqual(peers[2*9 + 1].sorted { $0 < $1 },
             [0, 1, 2, 9, 10, 11, 18, 20, 21, 22, 23, 24, 25, 26, 28, 37, 46, 55, 64, 73])
         
         /* Square 'E5' */
         XCTAssertEqual(peers[4*9 + 4].count, 20)
-        XCTAssertEqual(peers[4*9 + 4].sort { $0 < $1 },
+        XCTAssertEqual(peers[4*9 + 4].sorted { $0 < $1 },
             [4, 13, 22, 30, 31, 32, 36, 37, 38, 39, 41, 42, 43, 44, 48, 49, 50, 58, 67, 76])
     }
     
@@ -178,7 +180,7 @@ class TestSudokuSolver: XCTestCase {
     }
     
     func testFromFile() {
-        let fileManager = NSFileManager()
+        let fileManager = FileManager()
         fileManager.changeCurrentDirectoryPath(currentDirectoryPath)
         
         XCTAssertEqual(fromFile("easy50.txt", separator: "========").count, 50)

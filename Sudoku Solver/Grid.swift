@@ -15,7 +15,7 @@ var peers = [[Int]]()
 
 class Grid: CustomStringConvertible {
     /* To start, every square can be any digit */
-    var values = [Square](count: rows * columns, repeatedValue: Square(0x1ff))
+    var values = [Square](repeating: Square(0x1ff), count: rows * columns)
     
     /* Return description for protocol Printable. */
     var description: String {
@@ -33,7 +33,7 @@ class Grid: CustomStringConvertible {
         for _ in 0..<3*maxLen + 2 {
             lineSegment += "-"
         }
-        let line = [lineSegment,lineSegment,lineSegment].joinWithSeparator("+")
+        let line = [lineSegment,lineSegment,lineSegment].joined(separator: "+")
         
         /* Build table grid */
         var row = [String]()
@@ -41,23 +41,23 @@ class Grid: CustomStringConvertible {
             var col = [String]()
             
             for i in 0..<columns {
-                col.append(values[r * columns + i].stringByPaddingToLength(maxLen, withString: " ", startingAtIndex: 0))
+                col.append(values[r * columns + i].padding(toLength: maxLen, withPad: " ", startingAt: 0))
             }
             
-            let c0 = col[0...2].joinWithSeparator(" ")
-            let c1 = col[3...5].joinWithSeparator(" ")
-            let c2 = col[6...8].joinWithSeparator(" ")
-            row.append([c0,c1,c2].joinWithSeparator("|"))
+            let c0 = col[0...2].joined(separator: " ")
+            let c1 = col[3...5].joined(separator: " ")
+            let c2 = col[6...8].joined(separator: " ")
+            row.append([c0,c1,c2].joined(separator: "|"))
         }
         
-        let r0 = row[0...2].joinWithSeparator("\n")
-        let r1 = row[3...5].joinWithSeparator("\n")
-        let r2 = row[6...8].joinWithSeparator("\n")
-        return [r0,r1,r2].joinWithSeparator("\n\(line)\n") + "\n"
+        let r0 = row[0...2].joined(separator: "\n")
+        let r1 = row[3...5].joined(separator: "\n")
+        let r2 = row[6...8].joined(separator: "\n")
+        return [r0,r1,r2].joined(separator: "\n\(line)\n") + "\n"
     }
     
     /* Convert grid into an array of Int with '0' or '.' for empties. */
-    func gridValues(grid: String) -> [Int] {
+    func gridValues(_ grid: String) -> [Int] {
         var res = [Int]()
         for c in grid.characters {
             switch c {
@@ -86,7 +86,7 @@ class Grid: CustomStringConvertible {
     
     /* Eliminate all the other values (except d) from values[s] and propagate.
     Return values, except return nil if a contradiction is detected. */
-    func assign(s: Int, d: Int) -> [Square]? {
+    func assign(_ s: Int, d: Int) -> [Square]? {
         var otherValues = values[s]
         otherValues.removeDigit(d)
         
@@ -98,7 +98,7 @@ class Grid: CustomStringConvertible {
     
     /* Eliminate d from values[s]; propagate when values or places <= 2.
     Return values, except return nil if a contradiction is detected. */
-    func eliminate(s: Int, d: Int) -> [Square]? {
+    func eliminate(_ s: Int, d: Int) -> [Square]? {
         if !values[s].hasDigit(d) { return values } // Already eliminated
         
         values[s].removeDigit(d)
@@ -119,7 +119,7 @@ class Grid: CustomStringConvertible {
             for s in u {
                 if values[s].hasDigit(d) {
                     dPlaces = s
-                    ++dPlacesCount
+                    dPlacesCount += 1
                 }
             }
             if dPlacesCount == 0 { return nil } // Contradiction: no place for this value
@@ -158,7 +158,7 @@ class Grid: CustomStringConvertible {
         for d in values[s].digits {
             let values = self.values // save state
             if assign(s, d: d) != nil {
-                search()
+                _ = search()
             }
             if !solved { self.values = values } // restore state
         }

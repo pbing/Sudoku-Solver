@@ -33,27 +33,29 @@ struct Square: CustomStringConvertible {
     /* Return the number of set digits in value. */
     var count: Int {
         var val = value
-        var count: Int
-        for count = 0; val != 0; ++count {
+        var count = 0
+        
+        while val != 0 {
             val &= val - 1 // clear the least significant bit set
+            count += 1
         }
         return count
     }
     
-    func toMask(digit: Int) -> UInt16 {
+    func toMask(_ digit: Int) -> UInt16 {
         assert(digit >= 1 && digit <= 9, "Index out of range.")
         return UInt16(1 << (digit - 1))
     }
     
-    func hasDigit(digit: Int) -> Bool {
+    func hasDigit(_ digit: Int) -> Bool {
         return (value & toMask(digit)) != 0
     }
     
-    mutating func addDigit(digit: Int) {
+    mutating func addDigit(_ digit: Int) {
         value |= toMask(digit)
     }
     
-    mutating func removeDigit(digit: Int) {
+    mutating func removeDigit(_ digit: Int) {
         value &= ~toMask(digit)
     }
     

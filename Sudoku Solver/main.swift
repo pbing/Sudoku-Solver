@@ -17,7 +17,7 @@ for s in 0..<(rows * columns) {
 }
 
 /* added for profiling */
-let fileManager = NSFileManager()
+let fileManager = FileManager()
 fileManager.changeCurrentDirectoryPath(currentDirectoryPath)
 
 /*
